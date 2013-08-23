@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 public class Canvas extends JPanel {
 	private GUI gui;
 	private Player player;
+	private int pressLeft = KeyEvent.VK_LEFT;
 	public Canvas(GUI parent){
 		gui = parent;
 		this.setSize(parent.getWidth(),parent.getHeight());

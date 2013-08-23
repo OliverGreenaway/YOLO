@@ -1,18 +1,21 @@
 package Items;
 
+import java.awt.image.BufferedImage;
+
 import Core.Player;
 
 public class Beer extends Item implements pickUpItem {
 
-	@Override
-	public Item pickUp() {
-		// TODO Auto-generated method stub
-		return null;
+	public Beer(BufferedImage image) {
+		super(image);
+		
 	}
 
 	@Override
-	public void addThisItem(Player p) {
+	public void playerConsume(Player p) {
 		// TODO Auto-generated method stub
+		//blur
+		//randomize keys
 		
 	}
 

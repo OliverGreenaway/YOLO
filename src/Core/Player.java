@@ -49,7 +49,7 @@ public class Player {
 		posX-=2;
 	}
 	
-	public void mouseRight(){
+	public void moveRight(){
 		posX +=2;
 	}
 
