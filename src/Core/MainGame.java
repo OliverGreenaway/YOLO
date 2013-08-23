@@ -71,7 +71,7 @@ public class MainGame {
 					pickUpItem i = (pickUpItem) item;
 					i.playerConsume(player);
 				}
-				
+
 			}
 		}
 	}

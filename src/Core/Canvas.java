@@ -15,7 +15,11 @@ public class Canvas extends JPanel implements KeyListener {
 	private Player player;
 
 	private int pressLeft = KeyEvent.VK_LEFT;
-	
+	private int pressRight = KeyEvent.VK_RIGHT;
+	private int pressUP = KeyEvent.VK_UP;
+	private int pressDown = KeyEvent.VK_DOWN;
+
+
 	private MainGame main;
 
 	public Canvas(GUI parent){
@@ -50,7 +54,10 @@ public class Canvas extends JPanel implements KeyListener {
 	private void canvasKeyPressed(KeyEvent e){
 		
 		int STEP_SIZE = player.STEP_SIZE;
+
 		if (e.getKeyCode() == KeyEvent.VK_DOWN){
+		
+		if (e.getKeyCode() == pressDown){
 			
 			if (!main.checkWallCollision(0,STEP_SIZE)){
 				player.moveDown();
@@ -58,7 +65,7 @@ public class Canvas extends JPanel implements KeyListener {
 			}
 			
 		}
-		else if (e.getKeyCode() == KeyEvent.VK_LEFT){
+		else if (e.getKeyCode() == pressLeft){
 		
 			if (!main.checkWallCollision(-STEP_SIZE,0)){
 				player.moveDown();
@@ -66,14 +73,14 @@ public class Canvas extends JPanel implements KeyListener {
 			}
 		
 		}
-		else if (e.getKeyCode() == KeyEvent.VK_UP){
+		else if (e.getKeyCode() == pressUP){
 
 			if (!main.checkWallCollision(0,-STEP_SIZE)){
 				player.moveDown();
 				main.checkItemCollision();
 			}
 		}
-		else if (e.getKeyCode() == KeyEvent.VK_RIGHT){
+		else if (e.getKeyCode() == pressRight){
 
 			if (!main.checkWallCollision(STEP_SIZE,0)){
 				player.moveDown();
@@ -84,6 +91,7 @@ public class Canvas extends JPanel implements KeyListener {
 		
 		
 		gui.repaint();
+		}
 	}
 	
 	private void canvasMouseMoved(MouseEvent e){
@@ -114,4 +122,68 @@ public class Canvas extends JPanel implements KeyListener {
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
 	}
+	
+	/**
+	 * @return the pressLeft
+	 */
+	public int getPressLeft() {
+		return pressLeft;
+	}
+
+
+	/**
+	 * @param pressLeft the pressLeft to set
+	 */
+	public void setPressLeft(int pressLeft) {
+		this.pressLeft = pressLeft;
+	}
+
+
+	/**
+	 * @return the pressRight
+	 */
+	public int getPressRight() {
+		return pressRight;
+	}
+
+
+	/**
+	 * @param pressRight the pressRight to set
+	 */
+	public void setPressRight(int pressRight) {
+		this.pressRight = pressRight;
+	}
+
+
+	/**
+	 * @return the pressUP
+	 */
+	public int getPressUP() {
+		return pressUP;
+	}
+
+
+	/**
+	 * @param pressUP the pressUP to set
+	 */
+	public void setPressUP(int pressUP) {
+		this.pressUP = pressUP;
+	}
+
+
+	/**
+	 * @return the pressDown
+	 */
+	public int getPressDown() {
+		return pressDown;
+	}
+
+
+	/**
+	 * @param pressDown the pressDown to set
+	 */
+	public void setPressDown(int pressDown) {
+		this.pressDown = pressDown;
+	}
+
 }
