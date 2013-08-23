@@ -11,7 +11,7 @@ public class Tiles {
 
 	public Tiles() {
 		centerX = tiles.length / 2;
-		centerY = tiles[0].length;
+		centerY = tiles[0].length/2;
 		tiles[centerX][centerY] = new RoadTile(true, true, true, true, this, 0,
 				0);
 	}
