@@ -8,11 +8,12 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 
 import javax.swing.JPanel;
+import Items.Item;
 
-
-public class Canvas extends JPanel {
+public class Canvas extends JPanel implements KeyListener {
 	private GUI gui;
 	private Player player;
+	private MainGame main;
 	public Canvas(GUI parent){
 		gui = parent;
 		this.setSize(parent.getWidth(),parent.getHeight());
@@ -34,23 +35,48 @@ public class Canvas extends JPanel {
 				canvasMouseClicked(e);
 			}
 		});
-		this.addKeyListener(new KeyListener() {
-			
-			@Override
-			public void keyTyped(KeyEvent arg0) {}
-			
-			@Override
-			public void keyReleased(KeyEvent arg0) {}
-			
-			@Override
-			public void keyPressed(KeyEvent arg0) {
-				canvasKeyPressed(arg0);
-				
-			}
-		});
 	}
 	
 	private void canvasKeyPressed(KeyEvent e){
+		
+		
+		//basic logic for movement:
+		//check for wall collision
+		//then move player
+		//then check if you're on top of an item
+		if (e.getKeyCode() == KeyEvent.VK_DOWN){
+			
+			if (!main.checkWallCollision()){
+				player.moveDown();
+				Item item = main.checkItemCollision();
+			}
+			
+		}
+		else if (e.getKeyCode() == KeyEvent.VK_LEFT){
+			System.out.println("LEFT");
+			if (!main.checkWallCollision()){
+				player.moveDown();
+				Item item = main.checkItemCollision();
+			}
+		
+		}
+		else if (e.getKeyCode() == KeyEvent.VK_UP){
+
+			if (!main.checkWallCollision()){
+				player.moveDown();
+				Item item = main.checkItemCollision();
+			}
+		}
+		else if (e.getKeyCode() == KeyEvent.VK_RIGHT){
+
+			if (!main.checkWallCollision()){
+				player.moveDown();
+				Item item = main.checkItemCollision();
+			}
+		}
+		
+		
+		
 		gui.repaint();
 	}
 	
@@ -66,5 +92,22 @@ public class Canvas extends JPanel {
 	
 	public void paint(Graphics g){
 		super.paint(g);
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		System.out.println("2");
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		System.out.println("3");
 	}
 }
