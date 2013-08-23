@@ -40,42 +40,45 @@ public class Canvas extends JPanel implements KeyListener {
 			}
 		});
 	}
+
 	
+	//basic logic for movement:
+	//they try to move in a direction, compute what their bounding box
+	//would be and whether that box would be colliding with a wall.
+	//if it wouldn't collide, then you move player and check if they're
+	//now touching an item.
 	private void canvasKeyPressed(KeyEvent e){
 		
+		int STEP_SIZE = player.STEP_SIZE;
 		
-		//basic logic for movement:
-		//check for wall collision
-		//then move player
-		//then check if you're on top of an item
 		if (e.getKeyCode() == KeyEvent.VK_DOWN){
 			
-			if (!main.checkWallCollision()){
+			if (!main.checkWallCollision(0,STEP_SIZE)){
 				player.moveDown();
-				Item item = main.checkItemCollision();
+				main.checkItemCollision();
 			}
 			
 		}
 		else if (e.getKeyCode() == KeyEvent.VK_LEFT){
-			System.out.println("LEFT");
-			if (!main.checkWallCollision()){
+		
+			if (!main.checkWallCollision(-STEP_SIZE,0)){
 				player.moveDown();
-				Item item = main.checkItemCollision();
+				main.checkItemCollision();
 			}
 		
 		}
 		else if (e.getKeyCode() == KeyEvent.VK_UP){
 
-			if (!main.checkWallCollision()){
+			if (!main.checkWallCollision(0,-STEP_SIZE)){
 				player.moveDown();
-				Item item = main.checkItemCollision();
+				main.checkItemCollision();
 			}
 		}
 		else if (e.getKeyCode() == KeyEvent.VK_RIGHT){
 
-			if (!main.checkWallCollision()){
+			if (!main.checkWallCollision(STEP_SIZE,0)){
 				player.moveDown();
-				Item item = main.checkItemCollision();
+				main.checkItemCollision();
 			}
 		}
 		
@@ -100,7 +103,7 @@ public class Canvas extends JPanel implements KeyListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		
+		canvasKeyPressed(e);
 	}
 
 	@Override

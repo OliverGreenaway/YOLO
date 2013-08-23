@@ -11,6 +11,10 @@ public class Beer extends Item implements pickUpItem {
 		
 	}
 
+	public void use(){
+		
+	}
+	
 	@Override
 	public void playerConsume(Player p) {
 		// TODO Auto-generated method stub
