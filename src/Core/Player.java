@@ -13,7 +13,8 @@ public class Player {
 	
 	private int WIDTH;
 	private int HEIGHT;
-	private Rectangle boundingBox;
+	
+	public static final int STEP_SIZE = 2;
 	
 	private int health;
 	private int sobriety;
@@ -25,32 +26,27 @@ public class Player {
 		this.model = model;
 		this.WIDTH = model.getWidth();
 		this.HEIGHT = model.getHeight();
-		this.boundingBox = new Rectangle(WIDTH,HEIGHT);
 	}
 	
 	public void draw(Graphics g){
 		g.drawImage(model,posX,posY,null);
 	}
 	
-	public boolean collision(Rectangle other){
-		return boundingBox.intersects(other);
-	}
-	
 	/** MOVEMENT */
 	public void moveUp(){
-		posY-=2;
+		posY-=STEP_SIZE;
 	}
 	
 	public void moveDown(){
-		posY+=2;
+		posY+=STEP_SIZE;
 	}
 	
 	public void moveLeft(){
-		posX-=2;
+		posX-=STEP_SIZE;
 	}
 	
-	public void mouseRight(){
-		posX +=2;
+	public void moveRight(){
+		posX +=STEP_SIZE;
 	}
 
 	/** GETTERS AND SETTERS */
@@ -76,6 +72,16 @@ public class Player {
 
 	public void setSobriety(int sobriety) {
 		this.sobriety = sobriety;
+	}
+	
+	/** computes the boundingbox when the player is at (posX+extraX,posY+extraY) */
+	public Rectangle getNewBoundingBox(int extraX, int extraY){
+		return new Rectangle(posX + extraX, posY + extraY, WIDTH, HEIGHT);
+	}
+	
+	/** computes the boundingbox when the player is at (posX,posY) */
+	public Rectangle getBoundingBox(){
+		return new Rectangle(posX,posY,WIDTH,HEIGHT);
 	}
 	
 }
