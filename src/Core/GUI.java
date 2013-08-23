@@ -11,7 +11,6 @@ public class GUI extends JFrame {
 		this.add(canvas);
 		this.canvas.setVisible(true);
 		addKeyListener(canvas);
-		
 	}
 	
 	

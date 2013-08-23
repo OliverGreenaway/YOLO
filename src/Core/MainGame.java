@@ -10,7 +10,6 @@ import java.util.List;
 import environment.RoadTile;
 
 public class MainGame {
-	
 	private Player player;
 	private GUI gui;
 	private Canvas canvas;

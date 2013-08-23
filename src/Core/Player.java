@@ -14,8 +14,9 @@ public class Player {
 	public final int HEIGHT;
 	public static final int STEP_SIZE = 2;
 	
-	private int health;
-	private int sobriety;
+	public static int health;
+	public static int sobriety = 100;
+	public static int score = 0;
 	
 	private BufferedImage model;
 	private ImageObserver modelObserver;
@@ -30,18 +31,29 @@ public class Player {
 		this.POS_Y = canvas.getHeight()/2 - HEIGHT/2;
 	}
 	
+	/**
+	 * checks if the player gets too drunk, they black out 
+	 * and their sobriety level resets.
+	 */
+	public void isBlackOut(){
+		if (sobriety <= 0){
+			//Black out
+			sobriety = 100;
+		}
+	}
+	
 	public void draw(Graphics g){
 		g.drawImage(model,POS_X,POS_Y,null);
 	}
 
-	/** GETTERS AND SETTERS */
+/*	*//** GETTERS AND SETTERS *//*
 	public void setHealth(int health) {
 		this.health = health;
 	}
 
 	public void setSobriety(int sobriety) {
 		this.sobriety = sobriety;
-	}
+	}*/
 	
 	/** computes the boundingbox when the player is at (posX+extraX,posY+extraY) */
 	public Rectangle getNewBoundingBox(int extraX, int extraY){

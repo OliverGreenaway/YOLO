@@ -27,6 +27,7 @@ public class Canvas extends JPanel implements KeyListener {
 
 	public Canvas(GUI parent) {
 		gui = parent;
+		MainGame.score = 0;				//Reset Score
 		this.setSize(parent.getWidth(), parent.getHeight());
 		this.setBackground(Color.white);
 		this.addMouseMotionListener(new MouseMotionListener() {
@@ -101,6 +102,7 @@ public class Canvas extends JPanel implements KeyListener {
 
 	public void paint(Graphics g) {
 		super.paint(g);
+		//Draw Score here
 	}
 
 	@Override
