@@ -15,9 +15,6 @@ public abstract class Item {
 		
 	}
 	
-	/** "Use" this item */
-	public abstract void use();
-	
 	/**
 	 * @return the image
 	 */

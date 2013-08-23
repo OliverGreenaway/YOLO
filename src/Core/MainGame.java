@@ -16,6 +16,8 @@ public class MainGame {
 	private Canvas canvas;
 	private List<Item> items;
 	private List<Rectangle> boundingBoxes;
+	private int offset_y;
+	private int offset_x;
 
 	private RoadTile[][] map;
 	
@@ -25,10 +27,31 @@ public class MainGame {
 		this.canvas = canvas;
 		items = new ArrayList<Item>();
 		boundingBoxes = new ArrayList<Rectangle>();
+		offset_y = 0;
+		offset_x = 0;
 	}
 	
-	/** When the player pushes a button, they move in a certain direction.
-	 * Check if their new position's bounding box would collide with any walls. */
+	/** Player moves up, world moves down */
+	public void moveUp(){
+		offset_y += player.STEP_SIZE;
+	}
+	
+	/** Player moves down, world moves up */
+	public void moveDown(){
+		offset_y -= player.STEP_SIZE;
+	}
+	
+	/** Player moves right, world moves left */
+	public void moveRight(){
+		offset_x -= player.STEP_SIZE;
+	}
+	
+	/** Player moves left, world moves right */
+	public void moveLeft(){
+		offset_x += player.STEP_SIZE;
+	}
+	
+	/** Check if their new position's bounding box would collide with any walls. */
 	public boolean checkWallCollision(int stepX, int stepY){
 		Rectangle playerBox = player.getNewBoundingBox(stepX,stepY);
 		for (Rectangle box : boundingBoxes){
@@ -43,7 +66,12 @@ public class MainGame {
 		for (Item item : items){
 			Rectangle itemBox = item.getBoundingBox();
 			if (playerBox.intersects(itemBox)){
-				item.use();
+				
+				if (item instanceof pickUpItem){
+					pickUpItem i = (pickUpItem) item;
+					i.playerConsume(player);
+				}
+				
 			}
 		}
 	}

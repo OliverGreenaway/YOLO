@@ -17,6 +17,8 @@ public class Beer extends Item implements pickUpItem {
 	
 	@Override
 	public void playerConsume(Player p) {
+		
+		
 		// TODO Auto-generated method stub
 		//blur
 		//randomize keys

@@ -11,8 +11,8 @@ public class Player {
 	private int posX;
 	private int posY;
 	
-	private int WIDTH;
-	private int HEIGHT;
+	private final int WIDTH;
+	private final int HEIGHT;
 	
 	public static final int STEP_SIZE = 2;
 	
