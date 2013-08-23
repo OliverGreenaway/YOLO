@@ -1,13 +1,14 @@
 package Core;
 
 import Items.Item;
-import Items.pickUpItem;
+import Items.PickUpItem;
 
 import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
 import environment.RoadTile;
+import environment.Tiles;
 
 public class MainGame {
 	
@@ -15,7 +16,7 @@ public class MainGame {
 	private GUI gui;
 	private Canvas canvas;
 	private List<Item> items;
-	private List<Rectangle> boundingBoxes;
+	private Tiles tiles;
 	private int offset_y;
 	private int offset_x;
 
@@ -26,9 +27,10 @@ public class MainGame {
 		this.gui = gui;
 		this.canvas = canvas;
 		items = new ArrayList<Item>();
-		boundingBoxes = new ArrayList<Rectangle>();
 		offset_y = 0;
 		offset_x = 0;
+		tiles = new Tiles();
+		gui.repaint();
 	}
 	
 	/** Player moves up, world moves down */
@@ -53,6 +55,7 @@ public class MainGame {
 	
 	/** Check if their new position's bounding box would collide with any walls. */
 	public boolean checkWallCollision(int stepX, int stepY){
+		List<Rectangle> boundingBoxes = tiles.getBoundingBoxes(player.POS_X, player.POS_Y, canvas.SCREEN_WIDTH, canvas.SCREEN_HEIGHT);
 		Rectangle playerBox = player.getNewBoundingBox(stepX,stepY);
 		for (Rectangle box : boundingBoxes){
 			if (box.intersects(playerBox)) return true;
@@ -67,8 +70,8 @@ public class MainGame {
 			Rectangle itemBox = item.getBoundingBox();
 			if (playerBox.intersects(itemBox)){
 				
-				if (item instanceof pickUpItem){
-					pickUpItem i = (pickUpItem) item;
+				if (item instanceof PickUpItem){
+					PickUpItem i = (PickUpItem) item;
 					i.playerConsume(player);
 				}
 
