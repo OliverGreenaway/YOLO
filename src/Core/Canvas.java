@@ -57,8 +57,6 @@ public class Canvas extends JPanel implements KeyListener {
 
 		int STEP_SIZE = player.STEP_SIZE;
 
-		if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-
 			if (e.getKeyCode() == pressDown) {
 
 				if (!main.checkWallCollision(0, STEP_SIZE)) {
@@ -88,7 +86,6 @@ public class Canvas extends JPanel implements KeyListener {
 			}
 
 			gui.repaint();
-		}
 	}
 
 	private void canvasMouseMoved(MouseEvent e) {
