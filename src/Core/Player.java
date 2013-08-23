@@ -14,6 +14,8 @@ public class Player {
 	public final int HEIGHT;
 	public static final int STEP_SIZE = 2;
 	
+	public final int MAX_SOBRIETY = 100;
+	public final int MIN_SOBRIETY = 0;
 	private int health;
 	private int sobriety;
 	
@@ -28,8 +30,16 @@ public class Player {
 		this.canvas = canvas;
 		this.POS_X = canvas.getWidth()/2 - WIDTH/2;
 		this.POS_Y = canvas.getHeight()/2 - HEIGHT/2;
+		this.sobriety = MAX_SOBRIETY;
 	}
 	
+	/**
+	 * @return the sobriety
+	 */
+	public int getSobriety() {
+		return sobriety;
+	}
+
 	public void draw(Graphics g){
 		g.drawImage(model,POS_X,POS_Y,null);
 	}

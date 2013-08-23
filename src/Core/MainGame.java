@@ -1,7 +1,7 @@
 package Core;
 
 import Items.Item;
-import Items.pickUpItem;
+import Items.PickUpItem;
 
 import java.awt.Rectangle;
 import java.util.ArrayList;
@@ -67,8 +67,8 @@ public class MainGame {
 			Rectangle itemBox = item.getBoundingBox();
 			if (playerBox.intersects(itemBox)){
 				
-				if (item instanceof pickUpItem){
-					pickUpItem i = (pickUpItem) item;
+				if (item instanceof PickUpItem){
+					PickUpItem i = (PickUpItem) item;
 					i.playerConsume(player);
 				}
 
