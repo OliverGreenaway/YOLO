@@ -13,7 +13,7 @@ public class Canvas extends JPanel {
 	private GUI gui;
 	public Canvas(GUI parent){
 		gui = parent;
-		this.setPreferredSize(parent.getMaximumSize());
+		this.setSize(parent.getWidth(),parent.getHeight());
 		this.setBackground(Color.white);
 		this.addMouseMotionListener(new MouseMotionListener() {
 			
@@ -63,6 +63,6 @@ public class Canvas extends JPanel {
 	}
 	
 	public void paint(Graphics g){
-		
+		super.paint(g);
 	}
 }
