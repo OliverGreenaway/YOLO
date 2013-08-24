@@ -9,7 +9,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 
 import javax.swing.JPanel;
-import Items.Item;
 
 public class Canvas extends JPanel implements KeyListener {
 	private GUI gui;
@@ -98,6 +97,7 @@ public class Canvas extends JPanel implements KeyListener {
 
 	public void paint(Graphics g) {
 		super.paint(g);
+		//Draw Score here
 	}
 
 	@Override
