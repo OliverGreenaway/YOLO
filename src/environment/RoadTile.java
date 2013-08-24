@@ -67,7 +67,6 @@ public class RoadTile {
 							parent.createNew(this.x, this.y - 1).draw(g, x,
 									y - img.getHeight(), screenWidth,
 									screenHeight);
-							;
 						}
 					}
 					break;
@@ -105,6 +104,8 @@ public class RoadTile {
 									x - img.getWidth(), y, screenWidth,
 									screenHeight);
 						}
+						
+	
 					}
 					break;
 				default:
