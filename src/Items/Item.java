@@ -2,6 +2,8 @@ package Items;
 
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -23,7 +25,7 @@ public abstract class Item {
 		this.WIDTH = image.getWidth();
 		this.HEIGHT = image.getHeight();
 		try {
-			this.image = ImageIO.read(getClass().getResourceAsStream("data/Bottle.png"));
+			this.image = ImageIO.read(new FileInputStream("src"+File.separatorChar+"data"+File.separatorChar+"Bottle.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
