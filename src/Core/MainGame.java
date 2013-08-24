@@ -22,15 +22,16 @@ public class MainGame {
 
 	private RoadTile[][] map;
 	
-	public MainGame(Player player, GUI gui, Canvas canvas){
+	public MainGame(Player player, GUI gui, Canvas canvas, Tiles tiles){
+		canvas.setMain(this);
 		this.player = player;
 		this.gui = gui;
 		this.canvas = canvas;
 		items = new ArrayList<Item>();
 		offset_y = 0;
 		offset_x = 0;
-		tiles = new Tiles();
-		gui.repaint();
+		this.tiles = tiles;
+		//gui.repaint();
 	}
 	
 	/** Player moves up, world moves down */
@@ -55,7 +56,7 @@ public class MainGame {
 	
 	/** Check if their new position's bounding box would collide with any walls. */
 	public boolean checkWallCollision(int stepX, int stepY){
-		List<Rectangle> boundingBoxes = tiles.getBoundingBoxes(player.POS_X, player.POS_Y, canvas.SCREEN_WIDTH, canvas.SCREEN_HEIGHT);
+		List<Rectangle> boundingBoxes = tiles.getBoundingBoxes(offset_x, offset_y, canvas.SCREEN_WIDTH, canvas.SCREEN_HEIGHT);
 		Rectangle playerBox = player.getNewBoundingBox(stepX,stepY);
 		for (Rectangle box : boundingBoxes){
 			if (box.intersects(playerBox)) return true;

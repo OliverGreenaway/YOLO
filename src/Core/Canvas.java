@@ -1,14 +1,26 @@
 package Core;
 
 import java.awt.Color;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Rectangle;
+import java.awt.Shape;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
+import java.awt.image.BufferedImage;
+import java.awt.image.ImageObserver;
+import java.io.File;
+import java.io.IOException;
+import java.text.AttributedCharacterIterator;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
+
+import environment.Tiles;
 import Items.Item;
 
 public class Canvas extends JPanel implements KeyListener {
@@ -23,10 +35,22 @@ public class Canvas extends JPanel implements KeyListener {
 	private int pressUP = KeyEvent.VK_UP;
 	private int pressDown = KeyEvent.VK_DOWN;
 
+	private Tiles tiles;
+	
 	private MainGame main;
 
-	public Canvas(GUI parent) {
+	public Canvas(GUI parent, Tiles tiles) {
+
+		//create player
+		BufferedImage img = null;
+		String filename = "character.png";
+
+		
+		
+		
+		
 		gui = parent;
+		this.tiles = tiles;
 		this.setSize(parent.getWidth(), parent.getHeight());
 		this.setBackground(Color.white);
 		this.addMouseMotionListener(new MouseMotionListener() {
@@ -46,6 +70,18 @@ public class Canvas extends JPanel implements KeyListener {
 				canvasMouseClicked(e);
 			}
 		});
+		
+
+		try{
+			img = ImageIO.read(getClass().getResourceAsStream("/data"+File.separatorChar+filename));
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+		this.player = new Player(img,this);
+	}
+	
+	public void setMain(MainGame main){
+		this.main = main;
 	}
 
 	// basic logic for movement:
@@ -97,7 +133,11 @@ public class Canvas extends JPanel implements KeyListener {
 	}
 
 	public void paint(Graphics g) {
-		super.paint(g);
+		//super.paint(g);
+		
+		player.draw(g);
+		tiles.draw(g, player.POS_X, player.POS_Y, SCREEN_WIDTH, SCREEN_HEIGHT);
+		
 	}
 
 	@Override
@@ -152,6 +192,10 @@ public class Canvas extends JPanel implements KeyListener {
 		return pressUP;
 	}
 
+	public Player getPlayer(){
+		return this.player;
+	}
+	
 	/**
 	 * @param pressUP
 	 *            the pressUP to set

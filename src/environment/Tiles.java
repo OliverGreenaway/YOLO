@@ -122,11 +122,11 @@ public class Tiles {
 
 	public void draw(Graphics g, int x, int y, int screenWidth, int screenHeight) {
 		int xDiff = x % 320;
-		int yDiff = y & 320;
+		int yDiff = y % 320;
 		x = (int) Math.round(x / 320);
 		y = (int) Math.round(y / 320);
-		if (tiles[x][y] != null) {
-			tiles[x][y].draw(g, screenWidth / 2 + xDiff, screenHeight / 2
+		if (tiles[x+centerX][y+centerY] != null) {
+			tiles[x+centerX][y+centerY].draw(g, screenWidth / 2 + xDiff, screenHeight / 2
 					+ yDiff, screenWidth, screenHeight);
 		}
 	}
@@ -134,10 +134,10 @@ public class Tiles {
 	public List<Rectangle> getBoundingBoxes(int x, int y, int screenWidth,
 			int screenHeight) {
 		int xDiff = x % 320;
-		int yDiff = y & 320;
-		x = (int) Math.round(x / 320);
-		y = (int) Math.round(y / 320);
-		RoadTile road = tiles[x][y];
+		int yDiff = y % 320;
+		x = (int) (Math.floor(x / 320));
+		y = (int) (Math.floor(y / 320));
+		RoadTile road = tiles[x+centerX][y+centerY];
 		List<Rectangle> bounds = new ArrayList<Rectangle>();
 		bounds.add(new Rectangle(screenWidth / 2 + xDiff - 160, screenHeight
 				/ 2 + yDiff - 160, 128, 128));
