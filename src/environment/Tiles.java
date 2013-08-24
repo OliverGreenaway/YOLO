@@ -49,7 +49,6 @@ public class Tiles {
 		
 		for (int i = 0; i < tiles.size(); i++){
 			g.drawImage(this.image, x, start - ht*i - ht + depth,null);
-			System.out.println(startIndex);
 		}
 		
 		//check if the top of the last one is below the top of the screen

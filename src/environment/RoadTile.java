@@ -16,6 +16,20 @@ public class RoadTile{
 	
 	public RoadTile(int position){
 		this.position = position;
+		items = new ArrayList<Item>();
+		generateItems();
+	}
+	
+	public void generateItems(){
+	
+		for (int i = 0; i < 5; i++){
+			
+			double rand = Math.random();
+			if (rand < 0.2){
+				
+			}
+			
+		}
 		
 	}
 	
