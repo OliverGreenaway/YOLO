@@ -79,4 +79,12 @@ public class MainGame {
 		}
 	}
 	
+	public int getOffsetX(){
+		return this.offset_x;
+	}
+	
+	public int getOffsetY(){
+		return this.offset_y;
+	}
+	
 }
