@@ -10,18 +10,22 @@ import java.util.List;
 import javax.imageio.ImageIO;
 
 import Core.Canvas;
+import Core.GUI;
 
 public class Tiles {
 
 	private List<RoadTile> tiles;
 	public final static int TILE_HT = 500;
+	public final static int TILE_OFFSET = 160;
 	public static BufferedImage image;
 	public static BufferedImage imageFirst;
 	public static List<String> items;
-
-	public Tiles(String filepath) {
+	public final static int IMG_WD = 16;
+	
+	public GUI parent;
+	
+	public Tiles(String filepath, GUI parent) {
 		tiles = new ArrayList<RoadTile>();
-
 		tiles.add(new RoadTile(tiles.size(),this));
 		try {
 			this.image = ImageIO.read(new FileInputStream("src"
@@ -31,9 +35,8 @@ public class Tiles {
 		} catch (Exception e) {}
 	
 		this.items = new ArrayList<String>();
-		items.add("Beer");
+		items.add("Bottle");
 		items.add("Whiskey");
-		items.add("Vodka");
 		items.add("Food");
 		
 	}

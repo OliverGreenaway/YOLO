@@ -10,13 +10,14 @@ import environment.Tiles;
 
 
 public class GUI extends JFrame {
-	Canvas canvas;
-	MainGame main;
+	public Canvas canvas;
+	public MainGame main;
 	public GUI(){
 		this.setExtendedState(this.getExtendedState() | this.MAXIMIZED_BOTH);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		Tiles tiles = new Tiles("NSRoad.png");
+		Tiles tiles = new Tiles("NSRoad.png",this);
+		
 		this.canvas = new Canvas(this,tiles);
 		this.add(canvas);
 		this.canvas.setVisible(true);

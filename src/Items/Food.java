@@ -9,7 +9,7 @@ import Core.Player;
 
 public class Food extends Item implements PickUpItem{
 
-	public Food(BufferedImage image, Canvas canvas, int x, int y) {
+	public Food(BufferedImage image, Canvas canvas) {
 		super(image, canvas);
 	}
 	
