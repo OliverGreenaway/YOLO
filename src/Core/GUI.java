@@ -15,6 +15,7 @@ public class GUI extends JFrame {
 	public GUI(){
 		this.setExtendedState(this.getExtendedState() | this.MAXIMIZED_BOTH);
 		this.setVisible(true);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Tiles tiles = new Tiles();
 		this.canvas = new Canvas(this,tiles);
 		this.add(canvas);
