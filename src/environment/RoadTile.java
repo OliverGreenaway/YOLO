@@ -1,22 +1,22 @@
 package environment;
-import Items.Item;
-
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileInputStream;
-import java.util.ArrayList;
+import java.awt.Point;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import javax.imageio.ImageIO;
+import Items.Item;
 
 public class RoadTile{
 	
 	private int position;
-	private List<Item> items;
+	private Map<Item,Point> items;
 	
-	public RoadTile(int position){
+	private Tiles parent;
+	
+	public RoadTile(int position,Tiles parent){
 		this.position = position;
-		items = new ArrayList<Item>();
+		items = new HashMap<Item,Point>();
+		this.parent = parent;
 		generateItems();
 	}
 	
@@ -27,10 +27,34 @@ public class RoadTile{
 			double rand = Math.random();
 			if (rand < 0.2){
 				
+				List<String> items = parent.items;
+				int randIndex = (int)(Math.random()*(items.size()));
+				
+				generateValidPoint();
+				
+				if (items.get(randIndex).equals("Beer")){	
+				}
+				else if (items.get(randIndex).equals("Whiskey")){	
+				}
+				else if (items.get(randIndex).equals("Vodka")){
+				}
+				else if (items.get(randIndex).equals("Food")){
+				}
+				
 			}
 			
 		}
 		
+	}
+	
+	/** Generate a random point, iterate through the map
+	 * Check if it collides with anything
+	 */
+	public Point generateValidPoint(){
+		
+		
+		
+		return new Point(0,0);
 	}
 	
 }
