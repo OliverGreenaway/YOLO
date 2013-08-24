@@ -4,14 +4,23 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.imageio.ImageIO;
 
 
 public class Player {
 
 	public final int POS_X;
 	public final int POS_Y;
-	public final int WIDTH;
-	public final int HEIGHT;
+	private int IMG_WIDTH;
+	private int IMG_HEIGHT;
 	public static final int STEP_SIZE = 2;
 
 	public final static int MAX_SOBRIETY = 100;
@@ -20,18 +29,18 @@ public class Player {
 	public static int health;
 	public static int sobriety = MAX_SOBRIETY;
 	public static int score = 0;
-
+	
 	private BufferedImage model;
 	private ImageObserver modelObserver;
 	private Canvas canvas;
 
 	public Player(BufferedImage model, Canvas canvas){
 		this.model = model;
-		this.WIDTH = model.getWidth();
-		this.HEIGHT = model.getHeight();
+		this.IMG_WIDTH = model.getWidth();
+		this.IMG_HEIGHT = model.getHeight();
 		this.canvas = canvas;
-		this.POS_X = canvas.getWidth()/2 - WIDTH/2;
-		this.POS_Y = canvas.getHeight()/2 - HEIGHT/2;
+		this.POS_X = canvas.getWidth()/2 - IMG_WIDTH/2;
+		this.POS_Y = canvas.getHeight()/2 - IMG_HEIGHT/2;
 		//this.sobriety = MAX_SOBRIETY;
 	}
 
@@ -43,12 +52,23 @@ public class Player {
 
 	/** computes the boundingbox when the player is at (posX+extraX,posY+extraY) */
 	public Rectangle getNewBoundingBox(int extraX, int extraY){
-		return new Rectangle(POS_X + extraX, POS_Y + extraY, WIDTH, HEIGHT);
+		return new Rectangle(POS_X + extraX, POS_Y + extraY, IMG_WIDTH, IMG_HEIGHT);
 	}
 
 	/** computes the boundingbox when the player is at (posX,posY) */
 	public Rectangle getBoundingBox(){
-		return new Rectangle(POS_X,POS_Y,WIDTH,HEIGHT);
+		return new Rectangle(POS_X,POS_Y,IMG_WIDTH,IMG_HEIGHT);
+	}
+	
+	public void setImage(String filename){
+		try{
+			this.model = ImageIO.read(new FileInputStream("src"+File.separatorChar+"data"+File.separatorChar+filename));	
+		}
+		catch(IOException e){
+			e.printStackTrace();
+		}
+		this.IMG_HEIGHT = model.getHeight();
+		this.IMG_WIDTH = model.getWidth();
 	}
 
 	/**
