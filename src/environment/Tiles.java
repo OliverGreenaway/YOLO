@@ -19,10 +19,9 @@ public class Tiles {
 
 	public Tiles(String filepath) {
 		tiles = new ArrayList<RoadTile>();
+
 		tiles.add(new RoadTile(tiles.size()));
 		try {
-
-			System.out.println("src" + File.separatorChar + "data" + File.separatorChar + filepath);
 			this.image = ImageIO.read(new FileInputStream("src"
 					+ File.separatorChar + "data" + File.separatorChar
 					+ filepath));
@@ -38,7 +37,7 @@ public class Tiles {
 
 	}
 
-	public void draw(Graphics g, Canvas cv){
+	public void draw(Graphics g, Canvas cv, int depth){
 		
 		
 		
@@ -46,9 +45,17 @@ public class Tiles {
 		int ht = image.getHeight();
 		int start = cv.getHeight();
 		
+		int startIndex = (int)(depth/ht);
+		
 		for (int i = 0; i < tiles.size(); i++){
-			g.drawImage(this.image, x, start - ht*i - ht,null);
-			System.out.println(x + " " + (start - ht*i));
+			g.drawImage(this.image, x, start - ht*i - ht + depth,null);
+			System.out.println(startIndex);
+		}
+		
+		//check if the top of the last one is below the top of the screen
+		int lastHt = start - ht*tiles.size()-1 + depth;
+		if (lastHt > 0){
+			tiles.add(new RoadTile(tiles.size()));
 		}
 				
 	}

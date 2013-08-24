@@ -38,7 +38,6 @@ public class MainGame {
 		this.tiles = tiles;
 		setupAnimations();
 		
-		
 		run();
 	}
 
@@ -70,7 +69,7 @@ public class MainGame {
 
 				changeAnimation();
 
-				depth += 1;
+				depth += 7;
 				time = time2;
 			}
 		
