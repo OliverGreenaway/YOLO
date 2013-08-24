@@ -73,7 +73,7 @@ public class Canvas extends JPanel implements KeyListener {
 		
 
 		try{
-			img = ImageIO.read(getClass().getResourceAsStream("/data"+File.separatorChar+filename));
+			img = ImageIO.read(getClass().getResourceAsStream(File.separatorChar+"data"+File.separatorChar+filename));
 		}catch(IOException e){
 			e.printStackTrace();
 		}
