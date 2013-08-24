@@ -32,6 +32,8 @@ public class Whiskey extends Item implements PickUpItem {
 		}
 		
 		int amount = 15;
+		//increment score
+		Player.score += amount;
 		//check if the minimum sobriety is not reached if so set to 0
 		if(Player.sobriety - amount <= p.MIN_SOBRIETY){
 			Player.sobriety = 0;
