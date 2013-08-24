@@ -16,8 +16,8 @@ import Core.Player;
  */
 public class Whiskey extends Item implements PickUpItem {
 
-	public Whiskey(BufferedImage image, Canvas canvas) {
-		super(image, canvas);
+	public Whiskey(BufferedImage image) {
+		super(image);
 		// TODO Auto-generated constructor stub
 	}
 

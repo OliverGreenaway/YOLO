@@ -19,9 +19,8 @@ public abstract class Item {
 	private Rectangle boundingBox;
 	private Canvas canvas;
 	
-	public Item(BufferedImage image, Canvas canvas){
+	public Item(BufferedImage image){
 		this.image = image;
-		this.canvas = canvas;
 		this.WIDTH = image.getWidth();
 		this.HEIGHT = image.getHeight();
 		try {

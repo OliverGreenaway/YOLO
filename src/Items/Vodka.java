@@ -8,8 +8,8 @@ import Core.Player;
 
 public class Vodka extends Item implements PickUpItem {
 
-	public Vodka(BufferedImage image, Canvas canvas) {
-		super(image, canvas);
+	public Vodka(BufferedImage image) {
+		super(image);
 		// TODO Auto-generated constructor stub
 	}
 

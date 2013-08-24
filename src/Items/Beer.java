@@ -8,8 +8,8 @@ import Core.Player;
 
 public class Beer extends Item implements PickUpItem {
 
-	public Beer(BufferedImage image,Canvas canvas) {
-		super(image, canvas);
+	public Beer(BufferedImage image) {
+		super(image);
 		
 	}
 

@@ -1,8 +1,19 @@
 package environment;
+import Core.Canvas;
+import Items.*;
+
 import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
+
+import javax.imageio.ImageIO;
 
 import Items.Item;
 
@@ -17,44 +28,81 @@ public class RoadTile{
 		this.position = position;
 		items = new HashMap<Item,Point>();
 		this.parent = parent;
-		//generateItems();
+		generateItems();
 	}
 	
-//	public void generateItems(){
-//	
-//		for (int i = 0; i < 5; i++){
-//			
-//			double rand = Math.random();
-//			if (rand < 0.2){
-//				
-//				List<String> items = parent.items;
-//				int randIndex = (int)(Math.random()*(items.size()));
-//				
-//				generateValidPoint();
-//				
-//				if (items.get(randIndex).equals("Beer")){	
-//				}
-//				else if (items.get(randIndex).equals("Whiskey")){	
-//				}
-//				else if (items.get(randIndex).equals("Vodka")){
-//				}
-//				else if (items.get(randIndex).equals("Food")){
-//				}
-//				
-//			}
-//			
-//		}
-//		
-//	}
+	public void generateItems(){
+		if (position < 2) return;
+		//generate up to 5 items
+		for (int i = 0; i < 5; i++){	
+			double rand = Math.random();
+			if (rand < 0.2){
+				
+				//generate a valid position for the item
+				List<String> items = parent.items;
+				int randIndex = (int)(Math.random()*(this.items.size()));
+				Point p = generateValidPoint(parent.IMG_WD);
+				String filepath = "src"+File.separatorChar+"data"+File.separatorChar;
+				
+				//randomly choose an item to spawn
+				if (items.get(randIndex).equals("Bottle")){
+					BufferedImage img = null;
+					try{
+						img = ImageIO.read(new FileInputStream(filepath+"Bottle.png"));	
+					}
+					catch(IOException e){}
+					this.items.put(new Beer(img),p);
+				}
+				else if (items.get(randIndex).equals("Whiskey")){	
+					BufferedImage img = null;
+					try{
+						img = ImageIO.read(new FileInputStream(filepath+"Whiskey.png"));	
+					}
+					catch(IOException e){}
+					this.items.put(new Whiskey(img),p);
+				}
+				else if (items.get(randIndex).equals("Food")){
+					BufferedImage img = null;
+					try{
+						img = ImageIO.read(new FileInputStream(filepath+"Food.png"));	
+					}
+					catch(IOException e){}
+					this.items.put(new Food(img),p);
+				}
+				
+			}
+			
+		}
+		
+	}
+
 	
 	/** Generate a random point, iterate through the map
 	 * Check if it collides with anything
 	 */
-	public Point generateValidPoint(){
+	public Point generateValidPoint(int IMG_WD){
+		/*
 		
+		int TILE_HT = parent.TILE_HT;
+		int offset = 160;
+		int lowerBound = offset;
+		int upperBound = TILE_HT - offset;
+		Random rand = new Random();
+
+		boolean valid = true;
+		int randX = rand.nextInt(upperBound)+lowerBound;
+		int randY = rand.nextInt(upperBound);
+		Rectangle randRect = new Rectangle(randX,randY,IMG_WD,IMG_WD);
 		
-		
+		for (Point p : items.values()){
+			Rectangle itemRect = new Rectangle(p.x,p.y,IMG_WD,IMG_WD);
+			if (randRect.intersects(itemRect)){
+				valid = false;
+			}
+		}
+		*/
 		return new Point(0,0);
+		
 	}
 	
 }
