@@ -1,27 +1,20 @@
 package Core;
 
 import java.awt.Color;
-import java.awt.FontMetrics;
 import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Rectangle;
-import java.awt.Shape;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
-import java.awt.image.ImageObserver;
 import java.io.File;
 import java.io.IOException;
-import java.text.AttributedCharacterIterator;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import environment.Tiles;
-import Items.Item;
 
 public class Canvas extends JPanel implements KeyListener {
 	private GUI gui;
@@ -40,14 +33,6 @@ public class Canvas extends JPanel implements KeyListener {
 	private MainGame main;
 
 	public Canvas(GUI parent, Tiles tiles) {
-
-		//create player
-		BufferedImage img = null;
-		String filename = "character.png";
-
-		
-		
-		
 		
 		gui = parent;
 		this.tiles = tiles;
@@ -70,10 +55,14 @@ public class Canvas extends JPanel implements KeyListener {
 				canvasMouseClicked(e);
 			}
 		});
-		
 
+		//create player
+		BufferedImage img = null;
+		String filename = "character.png";		
+        System.out.println(System.getProperty("java.class.path"));
+		System.out.println(File.separatorChar+"data"+File.separatorChar+filename);
 		try{
-			img = ImageIO.read(getClass().getResourceAsStream(File.separatorChar+"data"+File.separatorChar+filename));
+			img = ImageIO.read(getClass().getResource(File.separatorChar + "data"+File.separatorChar+filename));
 		}catch(IOException e){
 			e.printStackTrace();
 		}
