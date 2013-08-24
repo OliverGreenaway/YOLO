@@ -40,7 +40,7 @@ public class RoadTile{
 				
 				//generate a valid position for the item
 				List<String> items = parent.items;
-				int randIndex = (int)(Math.random()*(items.size()));
+				int randIndex = (int)(Math.random()*(this.items.size()));
 				Point p = generateValidPoint(parent.IMG_WD);
 				String filepath = "src"+File.separatorChar+"data"+File.separatorChar;
 				Canvas cv = parent.parent.canvas;
@@ -81,7 +81,7 @@ public class RoadTile{
 	 * Check if it collides with anything
 	 */
 	public Point generateValidPoint(int IMG_WD){
-		
+		/*
 		
 		int TILE_HT = parent.TILE_HT;
 		int offset = 160;
@@ -100,8 +100,9 @@ public class RoadTile{
 				valid = false;
 			}
 		}
+		*/
+		return new Point(0,0);
 		
-		return new Point(randX,randY);
 	}
 	
 }

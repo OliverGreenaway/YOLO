@@ -26,7 +26,6 @@ public class Tiles {
 	
 	public Tiles(String filepath, GUI parent) {
 		tiles = new ArrayList<RoadTile>();
-		tiles.add(new RoadTile(tiles.size(),this));
 		try {
 			this.image = ImageIO.read(new FileInputStream("src"
 					+ File.separatorChar + "data" + File.separatorChar
@@ -41,6 +40,10 @@ public class Tiles {
 		
 	}
 
+	public void addTile(){
+		tiles.add(new RoadTile(tiles.size(),this));
+	}
+	
 	public void draw(Graphics g, Canvas cv, int depth){
 		
 		int x = cv.SCREEN_WIDTH/2 - image.getWidth()/2;
