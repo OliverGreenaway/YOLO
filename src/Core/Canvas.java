@@ -21,8 +21,8 @@ public class Canvas extends JPanel implements KeyListener {
 	private GUI gui;
 	private Player player;
 
-	public final int SCREEN_WIDTH = this.getWidth();
-	public final int SCREEN_HEIGHT = this.getHeight();
+	public int SCREEN_WIDTH = this.getWidth();
+	public int SCREEN_HEIGHT = this.getHeight();
 	
 	private int pressLeft = KeyEvent.VK_LEFT;
 	private int pressRight = KeyEvent.VK_RIGHT;
@@ -38,6 +38,8 @@ public class Canvas extends JPanel implements KeyListener {
 		gui = parent;
 		this.tiles = tiles;
 		this.setSize(parent.getWidth(), parent.getHeight());
+		this.SCREEN_WIDTH = parent.getWidth();
+		this.SCREEN_HEIGHT = parent.getHeight();
 		this.setBackground(Color.white);
 		this.addMouseMotionListener(new MouseMotionListener() {
 
@@ -123,7 +125,7 @@ public class Canvas extends JPanel implements KeyListener {
 
 	public void paint(Graphics g) {
 		//super.paint(g);
-		tiles.draw(g,main.getOffsetX(), main.getOffsetY(), SCREEN_WIDTH, SCREEN_HEIGHT);
+		//tiles.draw(g,main.getOffsetX(), main.getOffsetY(), SCREEN_WIDTH, SCREEN_HEIGHT);
 		player.draw(g);
 		
 		//Draw Score here
@@ -132,6 +134,9 @@ public class Canvas extends JPanel implements KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		canvasKeyPressed(e);
+		
+		
+		
 	}
 
 	@Override
