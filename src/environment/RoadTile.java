@@ -15,6 +15,7 @@ public class RoadTile {
 	private RoadTile[] neighbours;
 	private Tiles parent;
 	private int x, y;
+	private BufferedImage img = null;
 
 	public RoadTile(boolean north, boolean east, boolean south, boolean west,
 			Tiles parent, int x, int y) {
@@ -46,16 +47,19 @@ public class RoadTile {
 	}
 
 	public void draw(Graphics g, int x, int y, int screenWidth, int screenHeight) {
+		if(isDrawn() || x > screenWidth || y > screenHeight || y < 0 || x < 0){
+			return;
+		}
 		this.setDrawn(true);
 		BufferedImage img = getImage();
-		g.drawImage(img, x - img.getWidth(), y - img.getHeight(), null);
+		g.drawImage(img, x - img.getWidth() / 2, y - img.getHeight() / 2, null);
 		RoadTile[] neighbours = getAdjoining();
 		Direction[] entrances = getDirections();
 		for (Direction d : entrances) {
 			if (d != null) {
 				switch (d) {
 				case NORTH:
-					if (y - img.getHeight() / 2 < 0) {
+					if (y - img.getHeight()/2 > 0) {
 						if (neighbours[0] != null) {
 							neighbours[0].draw(g, x, y - img.getHeight(),
 									screenWidth, screenHeight);
@@ -68,7 +72,7 @@ public class RoadTile {
 					}
 					break;
 				case EAST:
-					if (x + img.getWidth() / 2 > screenWidth) {
+					if (x + img.getWidth()/2 < screenWidth) {
 						if (neighbours[1] != null) {
 							neighbours[1].draw(g, x + img.getWidth(), y,
 									screenWidth, screenHeight);
@@ -80,7 +84,7 @@ public class RoadTile {
 					}
 					break;
 				case SOUTH:
-					if (y + img.getHeight() / 2 > screenHeight) {
+					if (y + img.getHeight()/2 < screenHeight) {
 						if (neighbours[2] != null) {
 							neighbours[2].draw(g, x, y + img.getHeight(),
 									screenWidth, screenHeight);
@@ -92,7 +96,7 @@ public class RoadTile {
 					}
 					break;
 				case WEST:
-					if (x - img.getWidth() / 2 < 0) {
+					if (x - img.getWidth()/2 > 0) {
 						if (neighbours[3] != null) {
 							neighbours[3].draw(g, x - img.getWidth(), y,
 									screenWidth, screenHeight);
@@ -111,26 +115,33 @@ public class RoadTile {
 	}
 
 	public BufferedImage getImage() {
-		String filename = "";
-		if (north) {
-			filename += "N";
-		}
-		if (east) {
-			filename += "E";
-		}
-		if (south) {
-			filename += "S";
-		}
-		if (west) {
-			filename += "W";
-		}
-		filename += "Road.png";
-		BufferedImage img = null;
-		try {
-			img = ImageIO.read(new FileInputStream("src" + File.separatorChar
-					+ "data" + File.separatorChar + filename));
-		} catch (IOException e) {
-			e.printStackTrace();
+		if (this.img == null) {
+			String filename = "";
+			if (north) {
+				filename += "N";
+			}
+			if (east) {
+				filename += "E";
+			}
+			if (south) {
+				filename += "S";
+			}
+			if (west) {
+				filename += "W";
+			}
+			if(filename.equals("")){
+				filename+="N";
+			}
+			filename += "Road.png";
+			try {
+				this.img = ImageIO.read(new FileInputStream("src"
+						+ File.separatorChar + "data" + File.separatorChar
+						+ filename));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else {
+			return this.img;
 		}
 		return img;
 	}
