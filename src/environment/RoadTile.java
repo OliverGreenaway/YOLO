@@ -2,6 +2,8 @@ package environment;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -109,7 +111,7 @@ public class RoadTile {
 		filename += "Road.png";
 		BufferedImage img = null;
 		try{
-			img = ImageIO.read(getClass().getResourceAsStream("data/"+filename));
+			img = ImageIO.read(new FileInputStream("src"+File.separatorChar+"data"+File.separatorChar+filename));
 		}catch(IOException e){
 			e.printStackTrace();
 		}
