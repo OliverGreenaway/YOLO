@@ -17,13 +17,13 @@ public class Vodka extends Item implements PickUpItem {
 	public void playerConsume(Player p) {
 		// TODO Auto-generated method stub
 		//randomize UP, Left keys
-				int prevUp = super.getCanvas().getPressUP();
-				int prevLeft = super.getCanvas().getPressLeft();
-				double rand = Math.random();
-				if(rand > 0.4){
-					super.getCanvas().setPressUP(prevLeft);
-					super.getCanvas().setPressLeft(prevUp);
-				}
+		int setUP = super.getCanvas().getPressUP();
+		int setDown = super.getCanvas().getPressDown();
+		double rand = Math.random();
+		if (rand > 0.4) {
+			super.getCanvas().setPressLeft(setDown);
+			super.getCanvas().setPressRight(setUP);
+		}
 				
 				int amount = 20;
 				//increment score
