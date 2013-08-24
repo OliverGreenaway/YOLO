@@ -30,7 +30,7 @@ public class MainGame {
 		offset_y = 0;
 		offset_x = 0;
 		this.tiles = tiles;
-		//gui.repaint();
+		gui.repaint();
 	}
 	
 	/** Player moves up, world moves down */
@@ -77,6 +77,14 @@ public class MainGame {
 
 			}
 		}
+	}
+	
+	public int getOffsetX(){
+		return this.offset_x;
+	}
+	
+	public int getOffsetY(){
+		return this.offset_y;
 	}
 	
 }
