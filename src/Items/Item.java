@@ -14,14 +14,11 @@ public abstract class Item {
 	private Rectangle boundingBox;
 	private Canvas canvas;
 	
-	public Item(BufferedImage image, Canvas canvas, int x, int y){
+	public Item(BufferedImage image, Canvas canvas){
 		this.image = image;
 		this.canvas = canvas;
 		this.WIDTH = image.getWidth();
 		this.HEIGHT = image.getHeight();
-		this.posX = x;
-		this.posY = y;
-		this.boundingBox = new Rectangle(x, y, WIDTH, HEIGHT);
 	}
 	
 	/**

@@ -9,7 +9,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 
 import javax.swing.JPanel;
-import Items.Item;
 
 public class Canvas extends JPanel implements KeyListener {
 	private GUI gui;
@@ -27,7 +26,6 @@ public class Canvas extends JPanel implements KeyListener {
 
 	public Canvas(GUI parent) {
 		gui = parent;
-		MainGame.score = 0;				//Reset Score
 		this.setSize(parent.getWidth(), parent.getHeight());
 		this.setBackground(Color.white);
 		this.addMouseMotionListener(new MouseMotionListener() {
@@ -58,8 +56,6 @@ public class Canvas extends JPanel implements KeyListener {
 
 		int STEP_SIZE = player.STEP_SIZE;
 
-		if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-
 			if (e.getKeyCode() == pressDown) {
 
 				if (!main.checkWallCollision(0, STEP_SIZE)) {
@@ -89,7 +85,6 @@ public class Canvas extends JPanel implements KeyListener {
 			}
 
 			gui.repaint();
-		}
 	}
 
 	private void canvasMouseMoved(MouseEvent e) {
