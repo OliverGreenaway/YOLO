@@ -13,13 +13,10 @@ public class Beer extends Item implements PickUpItem {
 		
 	}
 
-	public void use(){
-		
-	}
 	
 	@Override
 	public void playerConsume(Player p) {
-
+	
 		//randomize UP, Down keys
 		int prevUp = super.getCanvas().getPressUP();
 		int prevDown = super.getCanvas().getPressDown();
@@ -29,14 +26,17 @@ public class Beer extends Item implements PickUpItem {
 			super.getCanvas().setPressDown(prevUp);
 		}
 		
+		int amount = 10;
+		//increment score
+		Player.score += amount;
 		//check if the minimum sobriety is not reached if so set to 0
-		if(p.getSobriety() - 10 <= p.MIN_SOBRIETY){
-			p.setSobriety(0);
+		if(Player.sobriety - amount <= p.MIN_SOBRIETY){
+			Player.sobriety = 0;
+			Player.blackOut();
 		}
-		
 		//minus 10 off sobriety
 		else{
-			p.setSobriety(p.getSobriety() - 10);
+			Player.sobriety -= amount;
 		}
 		
 		// TODO BLUR

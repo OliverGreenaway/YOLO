@@ -21,7 +21,6 @@ public class GUI extends JFrame {
 		this.canvas.setVisible(true);
 		addKeyListener(canvas);
 		
-		
 		//create main game
 		this.main = new MainGame(canvas.getPlayer(),this,canvas,tiles);
 		
