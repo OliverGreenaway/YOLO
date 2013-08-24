@@ -48,7 +48,7 @@ public class Canvas extends JPanel implements KeyListener {
 			walkLeft.add("man_left_walk2.png");
 			walkRight.add("man_right.png");
 			walkRight.add("man_right_walk1.png");
-			walkRight.add("man_right*.png");
+			walkRight.add("man_right.png");
 			walkRight.add("man_right_walk2.png");
 			walkUp.add("man_up.png");
 			walkUp.add("man_up_walk1.png");
