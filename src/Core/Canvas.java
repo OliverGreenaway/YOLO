@@ -34,14 +34,6 @@ public class Canvas extends JPanel implements KeyListener {
 	private MainGame main;
 
 	public Canvas(GUI parent, Tiles tiles) {
-
-		//create player
-		BufferedImage img = null;
-		String filename = "character.png";
-
-		
-		
-		
 		
 		gui = parent;
 		this.tiles = tiles;
@@ -64,8 +56,12 @@ public class Canvas extends JPanel implements KeyListener {
 				canvasMouseClicked(e);
 			}
 		});
-		
 
+		//create player
+		BufferedImage img = null;
+		String filename = "character.png";		
+        System.out.println(System.getProperty("java.class.path"));
+		System.out.println(File.separatorChar+"data"+File.separatorChar+filename);
 		try{
 
 			img = ImageIO.read(new FileInputStream("src"+File.separatorChar+"data"+File.separatorChar+filename));
