@@ -1,5 +1,7 @@
 package environment;
 
+import java.awt.Graphics;
+
 public class Tiles {
 	private RoadTile[][] tiles = new RoadTile[2000][2000];
 	private int centerX, centerY;
@@ -112,5 +114,15 @@ public class Tiles {
 			}
 		}
 		return tile;
+	}
+	
+	public void draw(Graphics g, int x, int y, int screenWidth, int screenHeight){
+		int xDiff = x%320;
+		int yDiff = y&320;
+		x = (int)Math.round(x/320);
+		y = (int)Math.round(y/320);
+		if(tiles[x][y] != null){
+			tiles[x][y].draw(g, screenWidth/2+xDiff, screenHeight/2+yDiff, screenWidth,screenHeight);
+		}
 	}
 }

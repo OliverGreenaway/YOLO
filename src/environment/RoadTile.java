@@ -1,8 +1,10 @@
 package environment;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 public class RoadTile {
 
@@ -91,10 +93,26 @@ public class RoadTile {
 	}
 
 	public BufferedImage getImage(){
-		BufferedImage img = new BufferedImage(320, 320, BufferedImage.TYPE_BYTE_GRAY);
-		Graphics g = img.getGraphics();
-		g.setColor(new Color((int)(Math.random()*255)));
-		g.fillRect(0, 0, img.getWidth(), img.getHeight());
+		String filename = "";
+		if(north){
+			filename += "N";
+		}
+		if(east){
+			filename += "E";
+		}
+		if(south){
+			filename += "S";
+		}
+		if(west){
+			filename += "W";
+		}
+		filename += "Road.png";
+		BufferedImage img = null;
+		try{
+			img = ImageIO.read(getClass().getResourceAsStream("data/"+filename));
+		}catch(IOException e){
+			e.printStackTrace();
+		}
 		return img;
 	}
 
