@@ -40,13 +40,17 @@ public class Player {
 		this.IMG_HEIGHT = model.getHeight();
 		this.canvas = canvas;
 		this.POS_X = canvas.getWidth()/2 - IMG_WIDTH/2;
-		this.POS_Y = canvas.getHeight()/2 - IMG_HEIGHT/2;
+		this.POS_Y = (int)(canvas.getHeight()*0.65 - IMG_HEIGHT/2);
 		//this.sobriety = MAX_SOBRIETY;
+	}
+	
+	public int getWidth(){
+		return model.getWidth();
 	}
 
 
-	public void draw(Graphics g){
-		g.drawImage(model,POS_X,POS_Y,null);
+	public void draw(Graphics g, int x, int y){
+		g.drawImage(model,POS_X - x,POS_Y - y,null);
 	}
 
 
@@ -61,6 +65,7 @@ public class Player {
 	}
 	
 	public void setImage(String filename){
+
 		try{
 			this.model = ImageIO.read(new FileInputStream("src"+File.separatorChar+"data"+File.separatorChar+filename));	
 		}

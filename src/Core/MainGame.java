@@ -4,8 +4,14 @@ import Items.Item;
 import Items.PickUpItem;
 
 import java.awt.Rectangle;
+import java.io.File;
+import java.io.FileInputStream;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Queue;
+
+import javax.imageio.ImageIO;
 
 import environment.RoadTile;
 import environment.Tiles;
@@ -18,8 +24,8 @@ public class MainGame {
 	private Tiles tiles;
 	private int offset_y;
 	private int offset_x;
+	public int depth = 0;
 
-	private RoadTile[][] map;
 	
 	public MainGame(Player player, GUI gui, Canvas canvas, Tiles tiles){
 		canvas.setMain(this);
@@ -30,36 +36,59 @@ public class MainGame {
 		offset_y = 0;
 		offset_x = 0;
 		this.tiles = tiles;
-		gui.repaint();
+		setupAnimations();
+		
+		
+		run();
+	}
+
+	private Queue<String> animations = new ArrayDeque<String>();
+	public void setupAnimations() {
+		animations.add("man_up.png");
+		animations.add("man_up_walk1.png");
+		animations.add("man_up.png");
+		animations.add("man_up_walk2.png");
 	}
 	
-	/** Player moves up, world moves down */
-	public void moveUp(){
-		offset_y += player.STEP_SIZE;
+	public void run(){
+
+		long time = System.currentTimeMillis();
+		
+		while (true){
+			
+			long time2 = System.currentTimeMillis();
+			if (time2 - time > 50){
+				if (canvas.getDirection().equals("right")){
+					offset_x -= player.STEP_SIZE;
+
+					offset_x = Math.max(offset_x, -160+player.getWidth()/2);
+				}
+				else if (canvas.getDirection().equals("left")){
+					offset_x += player.STEP_SIZE;
+					offset_x = Math.min(offset_x, 160-player.getWidth()/2);
+				}
+
+				changeAnimation();
+
+				depth += 1;
+				time = time2;
+			}
+		
+			gui.repaint();
+		}
+		
 	}
 	
-	/** Player moves down, world moves up */
-	public void moveDown(){
-		offset_y -= player.STEP_SIZE;
+	public void changeAnimation(){
+		String head = animations.poll();
+		player.setImage(head);
+		animations.add(head);
 	}
 	
-	/** Player moves right, world moves left */
-	public void moveRight(){
-		offset_x -= player.STEP_SIZE;
-	}
-	
-	/** Player moves left, world moves right */
-	public void moveLeft(){
-		offset_x += player.STEP_SIZE;
-	}
 	
 	/** Check if their new position's bounding box would collide with any walls. */
 	public boolean checkWallCollision(int stepX, int stepY){
-		List<Rectangle> boundingBoxes = tiles.getBoundingBoxes(offset_x, offset_y, canvas.SCREEN_WIDTH, canvas.SCREEN_HEIGHT);
-		Rectangle playerBox = player.getNewBoundingBox(stepX,stepY);
-		for (Rectangle box : boundingBoxes){
-			if (box.intersects(playerBox)) return true;
-		}
+
 		return false;
 	}
 	
@@ -85,6 +114,10 @@ public class MainGame {
 	
 	public int getOffsetY(){
 		return this.offset_y;
+	}
+	
+	public int getDepth(){
+		return this.depth;
 	}
 	
 }
