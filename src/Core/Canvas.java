@@ -2,6 +2,7 @@ package Core;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
@@ -27,46 +28,20 @@ public class Canvas extends JPanel implements KeyListener {
 
 	public int SCREEN_WIDTH = this.getWidth();
 	public int SCREEN_HEIGHT = this.getHeight();
-	
+
 	private int pressLeft = KeyEvent.VK_LEFT;
 	private int pressRight = KeyEvent.VK_RIGHT;
 	private int pressUP = KeyEvent.VK_UP;
 	private int pressDown = KeyEvent.VK_DOWN;
 	
-	private boolean pressed = false;
-	private boolean blocked = false;
-	
-	private Queue<String> walkLeft = new ArrayDeque<String>();
-	private Queue<String> walkRight = new ArrayDeque<String>();
-	private Queue<String> walkUp = new ArrayDeque<String>();
-	private Queue<String> walkDown = new ArrayDeque<String>();
-	
-	public void setupAnimations(){
-			walkLeft.add("man_left.png");
-			walkLeft.add("man_left_walk1.png");
-			walkLeft.add("man_left.png");
-			walkLeft.add("man_left_walk2.png");
-			walkRight.add("man_right.png");
-			walkRight.add("man_right_walk1.png");
-			walkRight.add("man_right.png");
-			walkRight.add("man_right_walk2.png");
-			walkUp.add("man_up.png");
-			walkUp.add("man_up_walk1.png");
-			walkUp.add("man_up.png");
-			walkUp.add("man_up_walk2.png");
-			walkDown.add("man_down.png");
-			walkDown.add("man_down_walk1.png");
-			walkDown.add("man_down.png");
-			walkDown.add("man_down_walk2.png");
-		}
-	
+	private String running = "";
+
 	private Tiles tiles;
-	
+
 	private MainGame main;
 
 	public Canvas(GUI parent, Tiles tiles) {
-		
-		setupAnimations();
+
 		gui = parent;
 		this.tiles = tiles;
 		this.setSize(parent.getWidth(), parent.getHeight());
@@ -91,24 +66,22 @@ public class Canvas extends JPanel implements KeyListener {
 			}
 		});
 
-		//create player
+		// create player
 		BufferedImage img = null;
-		String filename = "man_up.png";		
-		try{
+		String filename = "man_up.png";
+		try {
 
-			img = ImageIO.read(new FileInputStream("src"+File.separatorChar+"data"+File.separatorChar+filename));
-		}catch(IOException e){
+			img = ImageIO.read(new FileInputStream("src" + File.separatorChar
+					+ "data" + File.separatorChar + filename));
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		this.player = new Player(img,this);
+		this.player = new Player(img, this);
 	}
-	
-	public void setMain(MainGame main){
+
+	public void setMain(MainGame main) {
 		this.main = main;
 	}
-	
-	
-	
 	// basic logic for movement:
 	// they try to move in a direction, compute what their bounding box
 	// would be and whether that box would be colliding with a wall.
@@ -116,69 +89,17 @@ public class Canvas extends JPanel implements KeyListener {
 	// now touching an item.
 	private void canvasKeyPressed(KeyEvent e) {
 
-		int STEP_SIZE = player.STEP_SIZE;
-		pressed = true; 
-		
-		if (e.getKeyCode() == pressDown) {
-			String path = walkDown.poll();
-			player.setImage(path);
-			walkDown.add(path);
-			
-			if (!main.checkWallCollision(0, STEP_SIZE)) {
-				main.moveDown();
-				main.checkItemCollision();
-			}
-			
-		} else if (e.getKeyCode() == pressLeft) {
-			String path = walkLeft.poll();
-			player.setImage(path);
-			walkLeft.add(path);
-			
-			if (!main.checkWallCollision(-STEP_SIZE, 0)) {
-				main.moveLeft();
-				main.checkItemCollision();
-			}
+		if (e.getKeyCode() == pressLeft) {
+			running = "left";
 
-		} else if (e.getKeyCode() == pressUP) {
-			String path = walkUp.poll();
-			player.setImage(path);
-			walkUp.add(path);
-			
-			if (!main.checkWallCollision(0, -STEP_SIZE)) {
-				main.moveUp();
-				main.checkItemCollision();
-			}
-			
 		} else if (e.getKeyCode() == pressRight) {
-			String path = walkRight.poll();
-			player.setImage(path);
-			walkRight.add(path);
-			
-			if (!main.checkWallCollision(STEP_SIZE, 0)) {
-				main.moveRight();
-				main.checkItemCollision();
-			}
+			running = "right";
 		}
-		gui.repaint();
+		gui.repaint();	
 	}
 	
 	private void canvasKeyReleased(KeyEvent e){
-		
-
-		if (e.getKeyCode() == pressDown) {
-			player.setImage("man_down.png");
-		} else if (e.getKeyCode() == pressLeft) {
-			player.setImage("man_left.png");
-		} else if (e.getKeyCode() == pressUP) {
-			player.setImage("man_up.png");
-		} else if (e.getKeyCode() == pressRight) {
-			player.setImage("man_right.png");
-		}
-
-		pressed = false;
-		gui.repaint();
-		
-		
+		if (e.getKeyCode() == pressLeft || e.getKeyCode() == pressRight) running = "";
 	}
 
 	private void canvasMouseMoved(MouseEvent e) {
@@ -190,18 +111,19 @@ public class Canvas extends JPanel implements KeyListener {
 	}
 
 	public void paint(Graphics g) {
-		//super.paint(g);
-
-
-		//tiles.draw(g,main.getOffsetX(), main.getOffsetY(), SCREEN_WIDTH, SCREEN_HEIGHT);
+		// super.paint(g);
 		g.setColor(Color.WHITE);
 		g.fillRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-		tiles.draw(g,main.getOffsetX(), main.getOffsetY(), SCREEN_WIDTH, SCREEN_HEIGHT);
-		player.draw(g);
+
 		
-		//Draw Score here
+		
+		tiles.draw(g, this);
+		player.draw(g,main.getOffsetX(),main.getOffsetY());
+		
+		// Draw Score here
 	}
 
+	
 	@Override
 	public void keyPressed(KeyEvent e) {
 		canvasKeyPressed(e);
@@ -255,10 +177,10 @@ public class Canvas extends JPanel implements KeyListener {
 		return pressUP;
 	}
 
-	public Player getPlayer(){
+	public Player getPlayer() {
 		return this.player;
 	}
-	
+
 	/**
 	 * @param pressUP
 	 *            the pressUP to set
@@ -280,6 +202,10 @@ public class Canvas extends JPanel implements KeyListener {
 	 */
 	public void setPressDown(int pressDown) {
 		this.pressDown = pressDown;
+	}
+	
+	public String getDirection(){
+		return this.running;
 	}
 
 }
