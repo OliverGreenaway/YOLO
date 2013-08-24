@@ -3,6 +3,8 @@ package Items;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
+import Core.Canvas;
+
 public abstract class Item {
 	private BufferedImage image;
 	private int posX;
@@ -10,14 +12,33 @@ public abstract class Item {
 	private int WIDTH;
 	private int HEIGHT;
 	private Rectangle boundingBox;
+	private Canvas canvas;
 	
-	public Item(BufferedImage image){
-		
+	public Item(BufferedImage image, Canvas canvas, int x, int y){
+		this.image = image;
+		this.canvas = canvas;
+		this.WIDTH = image.getWidth();
+		this.HEIGHT = image.getHeight();
+		this.posX = x;
+		this.posY = y;
+		this.boundingBox = new Rectangle(x, y, WIDTH, HEIGHT);
 	}
 	
-	/** "Use" this item */
-	public abstract void use();
 	
+	/**
+	 * @return the canvas
+	 */
+	public Canvas getCanvas() {
+		return canvas;
+	}
+
+	/**
+	 * @param canvas the canvas to set
+	 */
+	public void setCanvas(Canvas canvas) {
+		this.canvas = canvas;
+	}
+
 	/**
 	 * @return the image
 	 */

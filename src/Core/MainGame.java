@@ -43,7 +43,7 @@ public class MainGame {
 		for (Item item : items){
 			Rectangle itemBox = item.getBoundingBox();
 			if (playerBox.intersects(itemBox)){
-				item.use();
+				//item.use();
 			}
 		}
 	}
