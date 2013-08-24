@@ -1,5 +1,7 @@
 package environment;
+import Items.*;
 import java.awt.Point;
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,11 +32,13 @@ public class RoadTile{
 				List<String> items = parent.items;
 				int randIndex = (int)(Math.random()*(items.size()));
 				
-				generateValidPoint();
+				Point p = generateValidPoint();
+				String filepath = "src"+File.separatorChar+"data"+File.separatorChar;
 				
-				if (items.get(randIndex).equals("Beer")){	
+				if (items.get(randIndex).equals("Beer")){
 				}
 				else if (items.get(randIndex).equals("Whiskey")){	
+					
 				}
 				else if (items.get(randIndex).equals("Vodka")){
 				}

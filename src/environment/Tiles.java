@@ -40,8 +40,6 @@ public class Tiles {
 
 	public void draw(Graphics g, Canvas cv, int depth){
 		
-		
-		
 		int x = cv.SCREEN_WIDTH/2 - image.getWidth()/2;
 		int ht = image.getHeight();
 		int start = cv.getHeight();
