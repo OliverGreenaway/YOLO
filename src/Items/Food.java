@@ -20,7 +20,13 @@ public class Food extends Item implements PickUpItem{
 		//Decrement Score
 		Player.score -= foodCost;
 		//Increase Sobriety
-		Player.sobriety += sobrietyCount;
+		if(Player.sobriety + sobrietyCount >= Player.MAX_SOBRIETY){
+			Player.sobriety = Player.MAX_SOBRIETY;
+		}
+		
+		else{
+			Player.sobriety += 10;
+		}
 	}
 
 	@Override
