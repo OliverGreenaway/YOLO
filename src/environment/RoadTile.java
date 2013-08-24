@@ -28,11 +28,11 @@ public class RoadTile{
 		this.position = position;
 		items = new HashMap<Item,Point>();
 		this.parent = parent;
-		//generateItems();
+		generateItems();
 	}
 	
 	public void generateItems(){
-	
+		if (position < 2) return;
 		//generate up to 5 items
 		for (int i = 0; i < 5; i++){	
 			double rand = Math.random();
@@ -43,7 +43,6 @@ public class RoadTile{
 				int randIndex = (int)(Math.random()*(this.items.size()));
 				Point p = generateValidPoint(parent.IMG_WD);
 				String filepath = "src"+File.separatorChar+"data"+File.separatorChar;
-				Canvas cv = parent.parent.canvas;
 				
 				//randomly choose an item to spawn
 				if (items.get(randIndex).equals("Bottle")){
@@ -52,7 +51,7 @@ public class RoadTile{
 						img = ImageIO.read(new FileInputStream(filepath+"Bottle.png"));	
 					}
 					catch(IOException e){}
-					this.items.put(new Beer(img, cv),p);
+					this.items.put(new Beer(img),p);
 				}
 				else if (items.get(randIndex).equals("Whiskey")){	
 					BufferedImage img = null;
@@ -60,7 +59,7 @@ public class RoadTile{
 						img = ImageIO.read(new FileInputStream(filepath+"Whiskey.png"));	
 					}
 					catch(IOException e){}
-					this.items.put(new Whiskey(img, cv),p);
+					this.items.put(new Whiskey(img),p);
 				}
 				else if (items.get(randIndex).equals("Food")){
 					BufferedImage img = null;
@@ -68,7 +67,7 @@ public class RoadTile{
 						img = ImageIO.read(new FileInputStream(filepath+"Food.png"));	
 					}
 					catch(IOException e){}
-					this.items.put(new Food(img, cv),p);
+					this.items.put(new Food(img),p);
 				}
 				
 			}

@@ -9,8 +9,8 @@ import Core.Player;
 
 public class Food extends Item implements PickUpItem{
 
-	public Food(BufferedImage image, Canvas canvas) {
-		super(image, canvas);
+	public Food(BufferedImage image) {
+		super(image);
 	}
 	
 	@Override

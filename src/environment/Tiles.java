@@ -22,8 +22,6 @@ public class Tiles {
 	public static List<String> items;
 	public final static int IMG_WD = 16;
 	
-	public GUI parent;
-	
 	public Tiles(String filepath, GUI parent) {
 		tiles = new ArrayList<RoadTile>();
 		try {
