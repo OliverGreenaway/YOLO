@@ -33,6 +33,9 @@ public class Canvas extends JPanel implements KeyListener {
 	private int pressUP = KeyEvent.VK_UP;
 	private int pressDown = KeyEvent.VK_DOWN;
 	
+	private boolean pressed = false;
+	private boolean blocked = false;
+	
 	private Queue<String> walkLeft = new ArrayDeque<String>();
 	private Queue<String> walkRight = new ArrayDeque<String>();
 	private Queue<String> walkUp = new ArrayDeque<String>();
@@ -45,7 +48,7 @@ public class Canvas extends JPanel implements KeyListener {
 			walkLeft.add("man_left_walk2.png");
 			walkRight.add("man_right.png");
 			walkRight.add("man_right_walk1.png");
-			walkRight.add("man_right.png");
+			walkRight.add("man_right*.png");
 			walkRight.add("man_right_walk2.png");
 			walkUp.add("man_up.png");
 			walkUp.add("man_up_walk1.png");
@@ -91,8 +94,6 @@ public class Canvas extends JPanel implements KeyListener {
 		//create player
 		BufferedImage img = null;
 		String filename = "man_up.png";		
-        System.out.println(System.getProperty("java.class.path"));
-		System.out.println(File.separatorChar+"data"+File.separatorChar+filename);
 		try{
 
 			img = ImageIO.read(new FileInputStream("src"+File.separatorChar+"data"+File.separatorChar+filename));
@@ -105,7 +106,9 @@ public class Canvas extends JPanel implements KeyListener {
 	public void setMain(MainGame main){
 		this.main = main;
 	}
-
+	
+	
+	
 	// basic logic for movement:
 	// they try to move in a direction, compute what their bounding box
 	// would be and whether that box would be colliding with a wall.
@@ -114,6 +117,7 @@ public class Canvas extends JPanel implements KeyListener {
 	private void canvasKeyPressed(KeyEvent e) {
 
 		int STEP_SIZE = player.STEP_SIZE;
+		pressed = true; 
 		
 		if (e.getKeyCode() == pressDown) {
 			String path = walkDown.poll();
@@ -129,7 +133,6 @@ public class Canvas extends JPanel implements KeyListener {
 			String path = walkLeft.poll();
 			player.setImage(path);
 			walkLeft.add(path);
-			System.out.println(path);
 			
 			if (!main.checkWallCollision(-STEP_SIZE, 0)) {
 				main.moveLeft();
@@ -172,6 +175,7 @@ public class Canvas extends JPanel implements KeyListener {
 			player.setImage("man_right.png");
 		}
 
+		pressed = false;
 		gui.repaint();
 		
 		
