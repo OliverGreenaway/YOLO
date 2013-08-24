@@ -30,15 +30,16 @@ public class Whiskey extends Item implements PickUpItem {
 			super.getCanvas().setPressLeft(prevRight);
 			super.getCanvas().setPressRight(prevLeft);
 		}
-
-		// check if the minimum sobriety is not reached if so set to 0
-		if (p.getSobriety() - 15 <= p.MIN_SOBRIETY) {
-			p.setSobriety(0);
+		
+		int amount = 15;
+		//check if the minimum sobriety is not reached if so set to 0
+		if(Player.sobriety - amount <= p.MIN_SOBRIETY){
+			Player.sobriety = 0;
+			Player.blackOut();
 		}
-
-		// minus 10 off sobriety
-		else {
-			p.setSobriety(p.getSobriety() - 15);
+		//minus 10 off sobriety
+		else{
+			Player.sobriety -= amount;
 		}
 
 	}

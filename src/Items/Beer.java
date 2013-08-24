@@ -29,14 +29,15 @@ public class Beer extends Item implements PickUpItem {
 			super.getCanvas().setPressDown(prevUp);
 		}
 		
+		int amount = 10;
 		//check if the minimum sobriety is not reached if so set to 0
-		if(Player.sobriety - 10 <= p.MIN_SOBRIETY){
+		if(Player.sobriety - amount <= p.MIN_SOBRIETY){
 			Player.sobriety = 0;
 			Player.blackOut();
 		}
 		//minus 10 off sobriety
 		else{
-			Player.sobriety -= 10;
+			Player.sobriety -= amount;
 		}
 		
 		// TODO BLUR
