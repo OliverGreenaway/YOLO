@@ -2,6 +2,9 @@ package Items;
 
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 import Core.Canvas;
 
@@ -19,6 +22,12 @@ public abstract class Item {
 		this.canvas = canvas;
 		this.WIDTH = image.getWidth();
 		this.HEIGHT = image.getHeight();
+		try {
+			this.image = ImageIO.read(getClass().getResourceAsStream("data/Bottle.png"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	/**

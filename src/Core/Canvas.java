@@ -46,6 +46,7 @@ public class Canvas extends JPanel implements KeyListener {
 				canvasMouseClicked(e);
 			}
 		});
+		
 	}
 
 	// basic logic for movement:
@@ -54,7 +55,6 @@ public class Canvas extends JPanel implements KeyListener {
 	// if it wouldn't collide, then you move player and check if they're
 	// now touching an item.
 	private void canvasKeyPressed(KeyEvent e) {
-
 		int STEP_SIZE = player.STEP_SIZE;
 
 			if (e.getKeyCode() == pressDown) {
