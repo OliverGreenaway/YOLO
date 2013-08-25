@@ -25,7 +25,6 @@ public abstract class Item {
 		try {
 			this.image = ImageIO.read(new FileInputStream("src"+File.separatorChar+"data"+File.separatorChar+"Bottle.png"));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

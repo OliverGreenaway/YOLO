@@ -25,6 +25,7 @@ public class MainGame {
 	private int offset_y;
 	private int offset_x;
 	public int depth = 0;
+	public static boolean running = true;
 
 	
 	public MainGame(Player player, GUI gui, Canvas canvas, Tiles tiles){
@@ -53,7 +54,7 @@ public class MainGame {
 
 		long time = System.currentTimeMillis();
 		
-		while (true){
+		while (running){
 			
 			long time2 = System.currentTimeMillis();
 			if (time2 - time > 50){
