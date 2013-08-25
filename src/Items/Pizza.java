@@ -20,10 +20,12 @@ public class Pizza extends Food {
 		//Increase Sobriety
 		if(Player.sobriety + sobrietyCount >= Player.MAX_SOBRIETY){
 			Player.sobriety = Player.MAX_SOBRIETY;
+			Player.blackOut();
 		}
 		
 		else{
 			Player.sobriety += foodCost;
+			Player.blackOut();
 		}
 	}
 
