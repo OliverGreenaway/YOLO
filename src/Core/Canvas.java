@@ -95,8 +95,6 @@ public class Canvas extends JPanel implements KeyListener {
 
 		} else if (e.getKeyCode() == pressRight) {
 			running = "right";
-		}else if(e.getKeyCode() == e.VK_UP){
-			fader.getHigh();
 		}
 		gui.repaint();
 	}
@@ -127,6 +125,7 @@ public class Canvas extends JPanel implements KeyListener {
 
 		// Score
 		int fontSize = 50;
+		//Graphics2D g2d = (Graphics2D) g;
 		g.setColor(Color.white);
 		Font font = new Font("Agency FB", Font.BOLD, fontSize);
 		g.setFont(font);

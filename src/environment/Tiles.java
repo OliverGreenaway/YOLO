@@ -65,14 +65,19 @@ public class Tiles {
 		this.canvas = cv;
 	}
 	
+	public RoadTile getTile(int index){
+		return tiles.get(index);
+	}
+	
 	public void draw(Graphics g, int depth){
 		
 		int x = canvas.SCREEN_WIDTH/2 - image.getWidth()/2;
 		int ht = image.getHeight();
 		int start = canvas.getHeight();
-		int startIndex = (int)(depth/ht);
+		int startIndex = (int)(depth/TILE_HT);
+
 		
-		for (int i = 0; i < tiles.size(); i++){
+		for (int i = startIndex; i < tiles.size(); i++){
 			//debugging:
 			Random rand = new Random();
 			g.setColor(new Color(rand.nextFloat(),rand.nextFloat(),rand.nextFloat()));
@@ -91,8 +96,8 @@ public class Tiles {
 				int itemY = start - ht*i - ht + depth + p.y;
 				
 				entry.getKey().draw(g,itemX,itemY);
-				
 				//debugging:
+				
 				g.drawRect(itemX,itemY,entry.getKey().getImage().getHeight(),entry.getKey().getImage().getHeight());
 				
 			}
@@ -104,5 +109,9 @@ public class Tiles {
 			tiles.add(new RoadTile(tiles.size(),this));
 		}
 				
+	}
+	
+	public int numTiles(){
+		return this.tiles.size();
 	}
 }

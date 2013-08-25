@@ -140,9 +140,7 @@ public class RoadTile {
 		int upperBound = TILE_HT - 2 * offset;
 		
 		Random rand = new Random();
-
 		boolean valid = true;
-
 		int count = 0;
 
 		while (true) {

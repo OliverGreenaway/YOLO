@@ -83,4 +83,5 @@ public class Player {
 			sobriety = MAX_SOBRIETY;
 		}
 	}
+	
 }
