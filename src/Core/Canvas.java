@@ -126,7 +126,6 @@ public class Canvas extends JPanel implements KeyListener {
 		// Score
 		int fontSize = 50;
 		//Graphics2D g2d = (Graphics2D) g;
-		System.out.println(Player.score);
 		g.setColor(Color.white);
 		Font font = new Font("Agency FB", Font.BOLD, fontSize);
 		g.setFont(font);

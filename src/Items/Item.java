@@ -25,6 +25,9 @@ public abstract class Item {
 		this.HEIGHT = image.getHeight();
 	}
 	
+	public int getWidth(){
+		return this.WIDTH;
+	}
 
 	/**
 	 * @return the image

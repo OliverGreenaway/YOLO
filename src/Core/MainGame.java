@@ -3,12 +3,14 @@ package Core;
 import Items.Item;
 import Items.PickUpItem;
 
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Queue;
 
 import javax.imageio.ImageIO;
@@ -27,8 +29,7 @@ public class MainGame {
 	public int depth = 0;
 	public static boolean running = true;
 
-	
-	public MainGame(Player player, GUI gui, Canvas canvas, Tiles tiles){
+	public MainGame(Player player, GUI gui, Canvas canvas, Tiles tiles) {
 		canvas.setMain(this);
 		this.player = player;
 		this.gui = gui;
@@ -38,73 +39,106 @@ public class MainGame {
 		offset_x = 0;
 		this.tiles = tiles;
 		setupAnimations();
-		
+
 		run();
 	}
 
 	private Queue<String> animations = new ArrayDeque<String>();
+
 	public void setupAnimations() {
 		animations.add("man_up.png");
 		animations.add("man_up_walk1.png");
 		animations.add("man_up.png");
 		animations.add("man_up_walk2.png");
 	}
-	
-	public void run(){
+
+	public void run() {
 
 		long time = System.currentTimeMillis();
-		
-		while (running){
-			
+
+		while (running) {
+
 			long time2 = System.currentTimeMillis();
-			if (time2 - time > 50){
-				if (canvas.getDirection().equals("right")){
+			if (time2 - time > 50) {
+				if (canvas.getDirection().equals("right")) {
 					offset_x -= player.STEP_SIZE;
 
-					offset_x = Math.max(offset_x, -160+player.getWidth()/2);
-				}
-				else if (canvas.getDirection().equals("left")){
+					offset_x = Math.max(offset_x, -160 + player.getWidth() / 2);
+				} else if (canvas.getDirection().equals("left")) {
 					offset_x += player.STEP_SIZE;
-					offset_x = Math.min(offset_x, 160-player.getWidth()/2);
+					offset_x = Math.min(offset_x, 160 - player.getWidth() / 2);
 				}
 
 				changeAnimation();
+				checkCollisions();
 
 				depth += 7;
 				time = time2;
 			}
-		
+
 			gui.repaint();
 		}
-		
+
 	}
-	
-	public void changeAnimation(){
+
+	public void changeAnimation() {
 		String head = animations.poll();
 		player.setImage(head);
 		animations.add(head);
 	}
-	
-	/** Check if their new position's bounding box would collide with any walls. */
-	public boolean checkWallCollision(int stepX, int stepY){
 
-		return false;
+	public Item checkCollisions() {
+		int startIndex = (int) (depth / Tiles.TILE_HT);
+		//RoadTile tile = tiles.getTile(startIndex);
+		int width = player.getWidth();
+		int ht = Tiles.TILE_HT;
+
+		Rectangle playerBox = new Rectangle(player.POS_X - offset_x,
+				player.POS_Y - offset_y, width, width);
+
+		for (int i = startIndex; i < tiles.numTiles(); i++) {
+
+			RoadTile tile = tiles.getTile(i);
+			Map<Item,Point> map = tile.getMap();
+			
+			for (Map.Entry<Item, Point> entry : map.entrySet()) {
+
+				//ht = TILE_HT
+				
+				// calculate item bounding box
+				int imageWidth = entry.getKey().getWidth();
+				Point p = entry.getValue();
+				int itemX = canvas.SCREEN_WIDTH / 2 - ht/2 + p.x;
+				int itemY = canvas.getHeight() - ht * i - ht + depth + p.y;
+				Rectangle itemBox = new Rectangle(itemX, itemY, imageWidth,
+						imageWidth);
+
+				//calculate intersection
+				if (playerBox.intersects(itemBox)) {
+					
+					if (entry.getKey() instanceof PickUpItem){
+						PickUpItem item = (PickUpItem) (entry.getKey());
+						item.playerConsume(player);
+					}
+					
+				}
+
+			}
+		}
+
+		return null;
 	}
-	
-	/** Check if the player is currently standing over an item */
-	public void checkItemCollision(){
-	}
-	
-	public int getOffsetX(){
+
+	public int getOffsetX() {
 		return this.offset_x;
 	}
-	
-	public int getOffsetY(){
+
+	public int getOffsetY() {
 		return this.offset_y;
 	}
-	
-	public int getDepth(){
+
+	public int getDepth() {
 		return this.depth;
 	}
-	
+
 }
