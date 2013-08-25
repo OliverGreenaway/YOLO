@@ -20,7 +20,7 @@ public class Vodka extends Item implements PickUpItem {
 		int setUP = p.getCanvas().getPressUP();
 		int setDown = p.getCanvas().getPressDown();
 		double rand = Math.random();
-		if (rand > 0.4) {
+		if (rand > 0.5) {
 			p.getCanvas().setPressLeft(setDown);
 			p.getCanvas().setPressRight(setUP);
 		}
