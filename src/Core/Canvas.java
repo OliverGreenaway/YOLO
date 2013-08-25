@@ -95,6 +95,8 @@ public class Canvas extends JPanel implements KeyListener {
 
 		} else if (e.getKeyCode() == pressRight) {
 			running = "right";
+		}else if(e.getKeyCode() == e.VK_UP){
+			fader.getHigh();
 		}
 		gui.repaint();
 	}

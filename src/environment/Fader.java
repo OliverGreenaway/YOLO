@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Random;
 
 import javax.imageio.ImageIO;
 
@@ -60,7 +61,7 @@ public class Fader {
 	public void getHigh(){
 		high = true;
 		startTime = System.currentTimeMillis();
-		highTime = (long)Math.random()*1000;
+		highTime = (long)(new Random().nextInt(10)+10)*1000;
 	}
 
 }
