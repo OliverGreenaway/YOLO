@@ -84,8 +84,6 @@ public class Tiles {
 				
 				entry.getKey().draw(g,itemX,itemY);
 			}
-			
-			
 		}
 		
 		//check if the top of the last one is below the top of the screen

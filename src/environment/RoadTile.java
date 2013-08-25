@@ -33,15 +33,35 @@ public class RoadTile {
 	}
 
 	public void generateItems() {
+		//generate up to 4 boulders
+		if (position < 1) return;
+		
+		for (int i = 0; i < 4; i++){
+			double rand = Math.random();
+			if (rand < 0.7){
+				Point p = generateValidPoint(Tiles.IMG_WD*2);
+				if (p.x < 0) break;
+				String filepath = "src" + File.separatorChar + "data" + File.separatorChar + "Boulder.png";
+				BufferedImage image = null;
+				try{
+					image = ImageIO.read(new FileInputStream(filepath));
+				}
+				catch(IOException e){}
+				this.items.put(new Boulder(image), p);
+			}
+		}
+		
+		
 		// generate up to 5 items
 		for (int i = 0; i < 5; i++) {
-			double rand = Math.random();
 
+			List<String> items = parent.items;
+			
+			double rand = Math.random();
 			if (rand < 0.5) {
 				// generate a valid position for the item
-				List<String> items = parent.items;
-				int randIndex = (int) (Math.random() * (this.parent.items.size()));
-				Point p = generateValidPoint(parent.IMG_WD);
+				int randIndex = (int) (Math.random() * (Tiles.items.size()));
+				Point p = generateValidPoint(Tiles.IMG_WD);
 				if (p.x < 0) break;
 				String filepath = "src" + File.separatorChar + "data" + File.separatorChar;
 
@@ -95,9 +115,7 @@ public class RoadTile {
 					case "Burger":
 						extension = parent.commonItems.get("Burger");
 						try {
-							img = ImageIO.read(new FileInputStream(filepath
-									+ extension));
-
+							img = ImageIO.read(new FileInputStream(filepath + extension));
 						} catch (IOException e) {
 					}
 						this.items.put(new Burger(img), p);
@@ -112,10 +130,11 @@ public class RoadTile {
 	/**
 	 * Generate a random point, iterate through the map Check if it collides
 	 * with anything
+	 * @ IMG_WD: the width of the item to generate
 	 */
 	public Point generateValidPoint(int IMG_WD) {
 
-		int TILE_HT = parent.TILE_HT;
+		int TILE_HT = Tiles.TILE_HT;
 		int offset = 160;
 		int lowerBound = offset;
 		int upperBound = TILE_HT - 2 * offset;
@@ -131,22 +150,28 @@ public class RoadTile {
 			int yPos = rand.nextInt(TILE_HT);
 			Rectangle rect = new Rectangle(xPos, yPos, IMG_WD, IMG_WD);
 
-			for (Point p : items.values()) {
-				Rectangle itemRect = new Rectangle(p.x, p.y, IMG_WD, IMG_WD);
-				if (rect.intersects(itemRect)) {
+			//get width of all items, check for intersection
+			for (Map.Entry<Item,Point> me : items.entrySet()){
+				Point p = me.getValue();
+				Item itm = me.getKey();
+				int width = itm.getImage().getHeight();
+				Rectangle itemRect = new Rectangle(p.x,p.y,width,width);
+				
+				if (rect.intersects(itemRect)){
 					valid = false;
 					count++;
 					break;
 				}
+				
 			}
 
 			if (valid)
-				return new Point(xPos, yPos);
+				return new Point(xPos,yPos);
 			if (count > 4)
-				return new Point(-1, -1);
-
+				return new Point(-1,-1);
+			
 		}
-
+			
 	}
 
 	public Map<Item, Point> getMap() {
