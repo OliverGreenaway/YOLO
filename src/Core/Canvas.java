@@ -23,7 +23,7 @@ import environment.Tiles;
 public class Canvas extends JPanel implements KeyListener {
 	private GUI gui;
 	private Player player;
-
+	public KeyEvent key;
 	public int SCREEN_WIDTH = this.getWidth();
 	public int SCREEN_HEIGHT = this.getHeight();
 
@@ -145,6 +145,7 @@ public class Canvas extends JPanel implements KeyListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
+		this.key = e;
 		canvasKeyPressed(e);
 	}
 
@@ -233,7 +234,8 @@ public class Canvas extends JPanel implements KeyListener {
 	}
 
 	public void getHigh() {
-		fader.getHigh();
+		long highTimer = fader.getHigh();
+		main.setHigh(highTimer);
 	}
 
 }

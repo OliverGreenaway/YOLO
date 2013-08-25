@@ -41,10 +41,11 @@ public class RoadTile {
 			if (rand < 0.7){
 				Point p = generateValidPoint(Tiles.IMG_WD*2);
 				if (p.x < 0) break;
-				String filepath = "src" + File.separatorChar + "data" + File.separatorChar + "Boulder.png";
+				String extension = parent.commonItems.get("Boulder");
+				String filepath = "src" + File.separatorChar + "data" + File.separatorChar;
 				BufferedImage image = null;
 				try{
-					image = ImageIO.read(new FileInputStream(filepath));
+					image = ImageIO.read(new FileInputStream(filepath + extension));
 				}
 				catch(IOException e){}
 				this.items.put(new Boulder(image), p);

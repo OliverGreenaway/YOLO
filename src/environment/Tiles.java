@@ -52,6 +52,7 @@ public class Tiles {
 		commonItems.put("Whiskey", "Whiskey.png");
 		commonItems.put("Burger","Burger.png");
 		commonItems.put("Vodka", "Vodka.png");
+		commonItems.put("Boulder", "Boulder.png");
 		
 		this.rareItems = new HashMap<String,String>();
 		rareItems.put("Shrooms","Shrooms.png");
@@ -110,6 +111,10 @@ public class Tiles {
 			tiles.add(new RoadTile(tiles.size(),this));
 		}
 				
+	}
+	
+	public void setModel(String item, String newPath){
+		commonItems.put(item,newPath);
 	}
 	
 	public int numTiles(){
