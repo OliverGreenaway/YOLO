@@ -245,5 +245,9 @@ public class Canvas extends JPanel implements KeyListener {
 	public MainGame getMain(){
 		return this.main;
 	}
+	
+	public GUI getGUI(){
+		return gui;
+	}
 
 }
