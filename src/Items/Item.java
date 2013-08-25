@@ -49,7 +49,13 @@ public abstract class Item {
 	
 	//draw the given image filepath
 	public void draw(Graphics g, String filepath, int x, int y){
-		g.drawImage(this.image, x,y,null);
+		String path = "src" + File.separatorChar + "data" + File.separatorChar;
+		BufferedImage img = null;
+		try{
+			img = ImageIO.read(new FileInputStream(path + filepath));
+		}
+		catch(IOException e){}
+		g.drawImage(img, x,y,null);
 	}
 	
 }

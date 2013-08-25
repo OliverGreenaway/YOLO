@@ -71,12 +71,14 @@ public class RoadTile {
 				BufferedImage img = null;
 
 				// rare item list
-				if (rand < 0.05) {
+				if (rand < 0.1) {
 
 					switch (items.get(randIndex)) {
 					case "Shrooms":
 						extension = parent.rareItems.get("Shrooms");
 						try {
+							
+							
 							img = ImageIO.read(new FileInputStream(filepath
 									+ extension));
 						} catch (IOException e) {
@@ -93,9 +95,7 @@ public class RoadTile {
 					case "Beer":
 						extension = parent.commonItems.get("Beer");
 						try {
-							img = ImageIO.read(new FileInputStream(filepath
-									+ extension));
-
+							img = ImageIO.read(new FileInputStream(filepath+ extension));
 						} catch (IOException e) {
 						}
 						this.items.put(new Beer(img), p);
