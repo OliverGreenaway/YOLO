@@ -16,7 +16,7 @@ public class Beer extends Item implements PickUpItem {
 	
 	@Override
 	public void playerConsume(Player p) {
-	
+		p.getCanvas().keyReleased(p.getCanvas().key);
 		//randomize LEFT, RIGHT keys
 		int prevRight = p.getCanvas().getPressRight();
 		int prevLeft = p.getCanvas().getPressLeft();
@@ -39,6 +39,7 @@ public class Beer extends Item implements PickUpItem {
 			Player.sobriety -= amount;
 			Player.blackOut();
 		}
+		
 		
 		// TODO BLUR
 		

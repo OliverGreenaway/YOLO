@@ -41,10 +41,11 @@ public class RoadTile {
 			if (rand < 0.7){
 				Point p = generateValidPoint(Tiles.IMG_WD*2);
 				if (p.x < 0) break;
-				String filepath = "src" + File.separatorChar + "data" + File.separatorChar + "Boulder.png";
+				String extension = parent.commonItems.get("Boulder");
+				String filepath = "src" + File.separatorChar + "data" + File.separatorChar;
 				BufferedImage image = null;
 				try{
-					image = ImageIO.read(new FileInputStream(filepath));
+					image = ImageIO.read(new FileInputStream(filepath + extension));
 				}
 				catch(IOException e){}
 				this.items.put(new Boulder(image), p);
@@ -70,12 +71,14 @@ public class RoadTile {
 				BufferedImage img = null;
 
 				// rare item list
-				if (rand < 0.05) {
+				if (rand < 0.1) {
 
 					switch (items.get(randIndex)) {
 					case "Shrooms":
 						extension = parent.rareItems.get("Shrooms");
 						try {
+							
+							
 							img = ImageIO.read(new FileInputStream(filepath
 									+ extension));
 						} catch (IOException e) {
@@ -92,9 +95,7 @@ public class RoadTile {
 					case "Beer":
 						extension = parent.commonItems.get("Beer");
 						try {
-							img = ImageIO.read(new FileInputStream(filepath
-									+ extension));
-
+							img = ImageIO.read(new FileInputStream(filepath+ extension));
 						} catch (IOException e) {
 						}
 						this.items.put(new Beer(img), p);
@@ -111,7 +112,7 @@ public class RoadTile {
 
 						this.items.put(new Whiskey(img), p);
 						break;
-
+						
 					case "Burger":
 						extension = parent.commonItems.get("Burger");
 						try {
@@ -120,7 +121,18 @@ public class RoadTile {
 					}
 						this.items.put(new Burger(img), p);
 						break;
+						
+					case "Whiskey":
+						extension = parent.commonItems.get("Whiskey");
+						try {
+							img = ImageIO.read(new FileInputStream(filepath + extension));
+						} catch (IOException e) {
 					}
+						this.items.put(new Whiskey(img), p);
+						break;
+						
+					}
+					
 				}
 			}
 		}

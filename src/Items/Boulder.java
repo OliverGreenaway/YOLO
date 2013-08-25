@@ -20,7 +20,7 @@ public class Boulder extends Item implements PickUpItem {
 	@Override
 	public void playerConsume(Player p) {
 		int r = JOptionPane.showConfirmDialog(null, new JLabel("Game Over!\n Play Again?"),
-				"Warning!", JOptionPane.YES_NO_OPTION,
+				"Game Over!", JOptionPane.YES_NO_OPTION,
 				JOptionPane.WARNING_MESSAGE);
 		if (r == 0){
 			//New Game

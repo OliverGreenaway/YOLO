@@ -72,10 +72,11 @@ public class Fader {
 		opacity = 0;
 	}
 
-	public void getHigh() {
+	public long getHigh(){
 		high = true;
 		startTime = System.currentTimeMillis();
-		highTime = (long) (new Random().nextInt(10) + 10) * 1000;
+		highTime = (long)(new Random().nextInt(10)+10)*1000;
+		return highTime;
 	}
 
 	public void setOpacity(float f) {

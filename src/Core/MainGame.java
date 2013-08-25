@@ -1,20 +1,22 @@
 package Core;
 
-import Items.Item;
-import Items.PickUpItem;
-
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.io.File;
-import java.io.FileInputStream;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
+import java.util.Random;
 
-import javax.imageio.ImageIO;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.Line;
 
+import Items.Item;
+import Items.PickUpItem;
 import environment.RoadTile;
 import environment.Tiles;
 
@@ -30,7 +32,15 @@ public class MainGame {
 	public static boolean running = true;
 	public int DEPTH_STEP = 6;
 	private Queue<Item> toRemove = new ArrayDeque<Item>();
+	private boolean high = false;
+	private long highTimer = 0;
+	private long highTimerStart = 0;
+	private final String path = "src" + File.separatorChar + "data" + File.separatorChar;
 
+	public String getPath(){
+		return this.path;
+	}
+	
 	public MainGame(Player player, GUI gui, Canvas canvas, Tiles tiles) {
 		canvas.setMain(this);
 		this.player = player;
@@ -41,7 +51,7 @@ public class MainGame {
 		offset_x = 0;
 		this.tiles = tiles;
 		setupAnimations();
-
+		System.out.println(this.path + "yolo.wav");
 		run();
 	}
 
@@ -72,13 +82,22 @@ public class MainGame {
 				}
 
 				changeAnimation();
-				Map<Item,Point> map = checkCollisions();
-				if (map != null){
+				Map<Item, Point> map = checkCollisions();
+				if (map != null) {
 					map.remove(toRemove.poll());
+					if (Math.random() < 0.1) playSound(this.path + "yolo.wav");
 				}
 
 				depth += DEPTH_STEP;
 				time = time2;
+			}
+
+			if (high) {
+				if (time2 - highTimerStart > highTimer) {
+					this.tiles.setModel("Boulder", "Boulder.png");
+					this.high = false;
+					this.DEPTH_STEP -= 3;
+				}
 			}
 
 			gui.repaint();
@@ -92,10 +111,10 @@ public class MainGame {
 		animations.add(head);
 	}
 
-	public Map<Item,Point> checkCollisions() {
-		
+	public Map<Item, Point> checkCollisions() {
+
 		int startIndex = (int) (depth / Tiles.TILE_HT);
-		//RoadTile tile = tiles.getTile(startIndex);
+		// RoadTile tile = tiles.getTile(startIndex);
 		int width = player.getWidth();
 		int ht = Tiles.TILE_HT;
 
@@ -105,27 +124,28 @@ public class MainGame {
 		for (int i = startIndex; i < tiles.numTiles(); i++) {
 
 			RoadTile tile = tiles.getTile(i);
-			Map<Item,Point> map = tile.getMap();
-			
+			Map<Item, Point> map = tile.getMap();
+
 			for (Map.Entry<Item, Point> entry : map.entrySet()) {
 
 				// calculate item bounding box
 				int imageWidth = entry.getKey().getWidth();
 				Point p = entry.getValue();
-				int itemX = canvas.SCREEN_WIDTH / 2 - ht/2 + p.x;
+				int itemX = canvas.SCREEN_WIDTH / 2 - ht / 2 + p.x;
 				int itemY = canvas.getHeight() - ht * i - ht + depth + p.y;
-				Rectangle itemBox = new Rectangle(itemX, itemY, imageWidth,imageWidth);
+				Rectangle itemBox = new Rectangle(itemX, itemY, imageWidth,
+						imageWidth);
 
-				//calculate intersection
+				// calculate intersection
 				if (playerBox.intersects(itemBox)) {
-					
-					if (entry.getKey() instanceof PickUpItem){
+
+					if (entry.getKey() instanceof PickUpItem) {
 						toRemove.add(entry.getKey());
 						PickUpItem item = (PickUpItem) (entry.getKey());
 						item.playerConsume(player);
 						return map;
 					}
-					
+
 				}
 
 			}
@@ -134,6 +154,26 @@ public class MainGame {
 		return null;
 	}
 
+	public void setHigh(long timer) {
+		this.tiles.setModel("Boulder", "Cat.png");
+		this.high = true;
+		this.highTimer = System.currentTimeMillis();
+		this.DEPTH_STEP +=3;
+		this.highTimerStart = timer;
+	}
+
+	/** Play the sound at the given filepath */
+	public static synchronized void playSound(final String url) {
+		    try {
+		    	Clip sound = (Clip) AudioSystem.getLine(new Line.Info(Clip.class));
+		    	sound.open(AudioSystem.getAudioInputStream(new File(url)));
+		    	sound.start();
+		    }
+		    catch(Exception e){
+		    	System.out.println(e.getStackTrace());
+		    }
+	}
+	
 	public int getOffsetX() {
 		return this.offset_x;
 	}
