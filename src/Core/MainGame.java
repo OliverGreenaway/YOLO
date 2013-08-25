@@ -1,24 +1,22 @@
 package Core;
 
-import Items.Item;
-import Items.PickUpItem;
-
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.io.File;
-import java.io.FileInputStream;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
+import java.util.Random;
 
-import javax.imageio.ImageIO;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.Line;
 
-import sun.tools.jar.Main;
+import Items.Item;
+import Items.PickUpItem;
 import environment.RoadTile;
 import environment.Tiles;
 
@@ -37,6 +35,7 @@ public class MainGame {
 	private boolean high = false;
 	private long highTimer = 0;
 	private long highTimerStart = 0;
+	private final String path = "src" + File.separatorChar + "data" + File.separatorChar;
 
 	public MainGame(Player player, GUI gui, Canvas canvas, Tiles tiles) {
 		canvas.setMain(this);
@@ -48,8 +47,7 @@ public class MainGame {
 		offset_x = 0;
 		this.tiles = tiles;
 		setupAnimations();
-
-		//playSound("yolo.wav");
+		System.out.println(this.path + "yolo.wav");
 		run();
 	}
 
@@ -83,6 +81,7 @@ public class MainGame {
 				Map<Item, Point> map = checkCollisions();
 				if (map != null) {
 					map.remove(toRemove.poll());
+					if (Math.random() < 0.1) playSound(this.path + "yolo.wav");
 				}
 
 				depth += DEPTH_STEP;
@@ -93,6 +92,7 @@ public class MainGame {
 				if (time2 - highTimerStart > highTimer) {
 					this.tiles.setModel("Boulder", "Boulder.png");
 					this.high = false;
+					this.DEPTH_STEP -= 3;
 				}
 			}
 
@@ -154,28 +154,22 @@ public class MainGame {
 		this.tiles.setModel("Boulder", "Cat.png");
 		this.high = true;
 		this.highTimer = System.currentTimeMillis();
+		this.DEPTH_STEP +=3;
 		this.highTimerStart = timer;
 	}
 
-	public static synchronized void playSound(final String file) {
-		  new Thread(new Runnable() {
-		  // The wrapper thread is unnecessary, unless it blocks on the
-		  // Clip finishing; see comments.
-		    public void run() {
-		      try {
-		        Clip clip = AudioSystem.getClip();
-		        String path = "src" + File.separatorChar + "data" + File.separatorChar + file;
-		        System.out.println(path);
-		        AudioInputStream inputStream = AudioSystem.getAudioInputStream(Main.class.getResourceAsStream(path));
-		        clip.open(inputStream);
-		        clip.start(); 
-		      } catch (Exception e) {
-		        System.err.println(e.getMessage());
-		      }
+	/** Play the sound at the given filepath */
+	public static synchronized void playSound(final String url) {
+		    try {
+		    	Clip sound = (Clip) AudioSystem.getLine(new Line.Info(Clip.class));
+		    	sound.open(AudioSystem.getAudioInputStream(new File(url)));
+		    	sound.start();
 		    }
-		  }).start();
-		}
-	
+		    catch(Exception e){
+		    	System.out.println(e.getStackTrace());
+		    }
+	}
+
 	public int getOffsetX() {
 		return this.offset_x;
 	}

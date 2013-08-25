@@ -71,7 +71,7 @@ public class RoadTile {
 				BufferedImage img = null;
 
 				// rare item list
-				if (rand < 1) {
+				if (rand < 0.1) {
 
 					switch (items.get(randIndex)) {
 					case "Shrooms":
@@ -112,7 +112,7 @@ public class RoadTile {
 
 						this.items.put(new Whiskey(img), p);
 						break;
-
+						
 					case "Burger":
 						extension = parent.commonItems.get("Burger");
 						try {
@@ -122,6 +122,7 @@ public class RoadTile {
 						this.items.put(new Burger(img), p);
 						break;
 					}
+					
 				}
 			}
 		}
