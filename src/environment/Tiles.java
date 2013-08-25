@@ -1,5 +1,6 @@
 package environment;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import javax.imageio.ImageIO;
 
@@ -71,10 +73,16 @@ public class Tiles {
 		int startIndex = (int)(depth/ht);
 		
 		for (int i = 0; i < tiles.size(); i++){
+			//debugging:
+			Random rand = new Random();
+			g.setColor(new Color(rand.nextFloat(),rand.nextFloat(),rand.nextFloat()));
+			g.drawRect(x,start-ht*i-ht+depth,TILE_HT,TILE_HT);
+			
 			if (i == 0) g.drawImage(this.imageFirst, x, start - ht*i - ht + depth, null);
 			else g.drawImage(this.image, x, start - ht*i - ht + depth,null);
 			
 			Map<Item,Point> items = tiles.get(i).getMap();
+
 			
 			for (Map.Entry<Item,Point> entry : items.entrySet()){
 				Point p = entry.getValue();
@@ -83,6 +91,10 @@ public class Tiles {
 				int itemY = start - ht*i - ht + depth + p.y;
 				
 				entry.getKey().draw(g,itemX,itemY);
+				
+				//debugging:
+				g.drawRect(itemX,itemY,entry.getKey().getImage().getHeight(),entry.getKey().getImage().getHeight());
+				
 			}
 		}
 		

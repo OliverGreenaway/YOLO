@@ -85,7 +85,6 @@ public class MainGame {
 		animations.add(head);
 	}
 	
-	
 	/** Check if their new position's bounding box would collide with any walls. */
 	public boolean checkWallCollision(int stepX, int stepY){
 

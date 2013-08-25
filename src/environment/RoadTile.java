@@ -138,6 +138,7 @@ public class RoadTile {
 		int offset = 160;
 		int lowerBound = offset;
 		int upperBound = TILE_HT - 2 * offset;
+		
 		Random rand = new Random();
 
 		boolean valid = true;
@@ -147,7 +148,7 @@ public class RoadTile {
 		while (true) {
 			valid = true;
 			int xPos = rand.nextInt(upperBound) + lowerBound;
-			int yPos = rand.nextInt(TILE_HT);
+			int yPos = rand.nextInt(TILE_HT - IMG_WD);
 			Rectangle rect = new Rectangle(xPos, yPos, IMG_WD, IMG_WD);
 
 			//get width of all items, check for intersection

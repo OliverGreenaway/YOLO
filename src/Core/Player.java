@@ -60,17 +60,6 @@ public class Player {
 		g.drawImage(model,POS_X - x,POS_Y - y,null);
 	}
 
-
-	/** computes the boundingbox when the player is at (posX+extraX,posY+extraY) */
-	public Rectangle getNewBoundingBox(int extraX, int extraY){
-		return new Rectangle(POS_X + extraX, POS_Y + extraY, IMG_WIDTH, IMG_HEIGHT);
-	}
-
-	/** computes the boundingbox when the player is at (posX,posY) */
-	public Rectangle getBoundingBox(){
-		return new Rectangle(POS_X,POS_Y,IMG_WIDTH,IMG_HEIGHT);
-	}
-	
 	public void setImage(String filename){
 
 		try{
