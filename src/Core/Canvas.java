@@ -233,7 +233,8 @@ public class Canvas extends JPanel implements KeyListener {
 	}
 
 	public void getHigh() {
-		fader.getHigh();
+		long highTimer = fader.getHigh();
+		main.setHigh(highTimer);
 	}
 
 }

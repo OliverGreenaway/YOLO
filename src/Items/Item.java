@@ -18,6 +18,7 @@ public abstract class Item {
 	private int WIDTH;
 	private int HEIGHT;
 	private Rectangle boundingBox;
+	String pathname;
 	
 	public Item(BufferedImage image){
 		this.image = image;
@@ -44,6 +45,17 @@ public abstract class Item {
 	
 	public void draw(Graphics g, int x, int y){
 		g.drawImage(this.image, x,y,null);
+	}
+	
+	//draw the given image filepath
+	public void draw(Graphics g, String filepath, int x, int y){
+		String path = "src" + File.separatorChar + "data" + File.separatorChar;
+		BufferedImage img = null;
+		try{
+			img = ImageIO.read(new FileInputStream(path + filepath));
+		}
+		catch(IOException e){}
+		g.drawImage(img, x,y,null);
 	}
 	
 }

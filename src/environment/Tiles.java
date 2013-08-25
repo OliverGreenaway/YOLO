@@ -16,6 +16,7 @@ import javax.imageio.ImageIO;
 
 import Core.Canvas;
 import Core.GUI;
+import Items.Boulder;
 import Items.Item;
 
 public class Tiles {
@@ -52,6 +53,7 @@ public class Tiles {
 		commonItems.put("Whiskey", "Whiskey.png");
 		commonItems.put("Burger","Burger.png");
 		commonItems.put("Vodka", "Vodka.png");
+		commonItems.put("Boulder", "Boulder.png");
 		
 		this.rareItems = new HashMap<String,String>();
 		rareItems.put("Shrooms","Shrooms.png");
@@ -96,7 +98,9 @@ public class Tiles {
 				int itemX = x + p.x;
 				int itemY = start - ht*i - ht + depth + p.y;
 				
-				entry.getKey().draw(g,itemX,itemY);
+				Item itm = entry.getKey();
+				if (itm instanceof Boulder) itm.draw(g, commonItems.get("Boulder"), itemX, itemY);
+				else entry.getKey().draw(g,itemX,itemY);
 				
 				//debugging: bounding boxes
 				//g.drawRect(itemX,itemY,entry.getKey().getImage().getHeight(),entry.getKey().getImage().getHeight());
@@ -110,6 +114,10 @@ public class Tiles {
 			tiles.add(new RoadTile(tiles.size(),this));
 		}
 				
+	}
+	
+	public void setModel(String item, String newPath){
+		commonItems.put(item,newPath);
 	}
 	
 	public int numTiles(){
