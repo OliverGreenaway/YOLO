@@ -71,7 +71,7 @@ public class RoadTile {
 				BufferedImage img = null;
 
 				// rare item list
-				if (rand < 1) {
+				if (rand < 0.1) {
 
 					switch (items.get(randIndex)) {
 					case "Shrooms":
