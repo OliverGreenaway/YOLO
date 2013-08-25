@@ -78,14 +78,18 @@ public class Player {
 	 */
 	public static  void blackOut(){
 
-		canvas.setOpacity((float)sobriety/(float)MAX_SOBRIETY);
-		System.out.println((float)sobriety/(float)MAX_SOBRIETY);
+		
 		if (sobriety <= MIN_SOBRIETY){
 			//Black out - need to do this
 			//reset sobriety
 			sobriety = MAX_SOBRIETY;
 			
 		}
+		canvas.setOpacity(1.0f-((float)sobriety/(float)MAX_SOBRIETY));
+	}
+	
+	public void getHigh(){
+		canvas.getHigh();
 	}
 	
 }
