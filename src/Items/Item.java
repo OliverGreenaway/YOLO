@@ -17,7 +17,6 @@ public abstract class Item {
 	private int WIDTH;
 	private int HEIGHT;
 	private Rectangle boundingBox;
-	private Canvas canvas;
 	
 	public Item(BufferedImage image){
 		this.image = image;
@@ -31,19 +30,6 @@ public abstract class Item {
 		}
 	}
 	
-	/**
-	 * @return the canvas
-	 */
-	public Canvas getCanvas() {
-		return canvas;
-	}
-
-	/**
-	 * @param canvas the canvas to set
-	 */
-	public void setCanvas(Canvas canvas) {
-		this.canvas = canvas;
-	}
 
 	/**
 	 * @return the image

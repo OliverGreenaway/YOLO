@@ -34,6 +34,13 @@ public class Player {
 	private ImageObserver modelObserver;
 	private Canvas canvas;
 
+	/**
+	 * @return the canvas
+	 */
+	public Canvas getCanvas() {
+		return canvas;
+	}
+
 	public Player(BufferedImage model, Canvas canvas){
 		this.model = model;
 		this.IMG_WIDTH = model.getWidth();
