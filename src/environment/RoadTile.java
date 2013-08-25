@@ -59,7 +59,7 @@ public class RoadTile {
 			List<String> items = parent.items;
 			
 			double rand = Math.random();
-			if (rand < 0.12) {
+			if (rand < 0.1) {
 				// generate a valid position for the item
 				int randIndex = (int) (Math.random() * (Tiles.items.size()));
 				Point p = generateValidPoint(Tiles.IMG_WD);
