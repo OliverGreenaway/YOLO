@@ -78,10 +78,11 @@ public class Tiles {
 
 		
 		for (int i = startIndex; i < tiles.size(); i++){
+			
 			//debugging:
-			Random rand = new Random();
-			g.setColor(new Color(rand.nextFloat(),rand.nextFloat(),rand.nextFloat()));
-			g.drawRect(x,start-ht*i-ht+depth,TILE_HT,TILE_HT);
+			//Random rand = new Random();
+			//g.setColor(new Color(rand.nextFloat(),rand.nextFloat(),rand.nextFloat()));
+			//g.drawRect(x,start-ht*i-ht+depth,TILE_HT,TILE_HT);
 			
 			if (i == 0) g.drawImage(this.imageFirst, x, start - ht*i - ht + depth, null);
 			else g.drawImage(this.image, x, start - ht*i - ht + depth,null);
@@ -96,9 +97,9 @@ public class Tiles {
 				int itemY = start - ht*i - ht + depth + p.y;
 				
 				entry.getKey().draw(g,itemX,itemY);
-				//debugging:
 				
-				g.drawRect(itemX,itemY,entry.getKey().getImage().getHeight(),entry.getKey().getImage().getHeight());
+				//debugging: bounding boxes
+				//g.drawRect(itemX,itemY,entry.getKey().getImage().getHeight(),entry.getKey().getImage().getHeight());
 				
 			}
 		}
