@@ -1,6 +1,7 @@
 package Items;
 
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
 import Core.Player;
@@ -21,6 +22,8 @@ public class Burger extends Item implements PickUpItem{
 		//Decrement Score
 		Player.score -= foodCost;
 		//Increase Sobriety
+		p.getCanvas().setPressLeft(KeyEvent.VK_LEFT);
+		p.getCanvas().setPressRight(KeyEvent.VK_RIGHT);
 		if(Player.sobriety + sobrietyCount >= Player.MAX_SOBRIETY){
 			Player.sobriety = Player.MAX_SOBRIETY;
 		}
