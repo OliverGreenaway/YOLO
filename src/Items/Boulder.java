@@ -18,7 +18,7 @@ public class Boulder extends Item implements PickUpItem {
 	@Override
 	public void playerConsume(Player p) {
 		JOptionPane.showMessageDialog(null,
-				"YOUR FUCKED BRO!!!!!!!!!!!!!");
+				"GAME OVER!");
 		MainGame.running = false;
 		try {
 			Thread.sleep(5000);
