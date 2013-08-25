@@ -25,6 +25,10 @@ public class Beer extends Item implements PickUpItem {
 			p.getCanvas().setPressRight(prevLeft);
 			p.getCanvas().setPressLeft(prevRight);
 		}
+		else{
+			p.getCanvas().setPressRight(prevRight);
+			p.getCanvas().setPressLeft(prevLeft);
+		}
 		
 		int amount = 10;
 		//increment score
