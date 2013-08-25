@@ -88,4 +88,8 @@ public class Player {
 		canvas.setOpacity(1.0f-((float)sobriety/(float)MAX_SOBRIETY));
 	}
 	
+	public void getHigh(){
+		canvas.getHigh();
+	}
+	
 }

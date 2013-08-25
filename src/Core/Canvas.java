@@ -232,4 +232,8 @@ public class Canvas extends JPanel implements KeyListener {
 		fader.setOpacity(f);
 	}
 
+	public void getHigh() {
+		fader.getHigh();
+	}
+
 }

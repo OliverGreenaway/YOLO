@@ -13,8 +13,7 @@ public class Shrooms extends Item implements PickUpItem {
 
 	@Override
 	public void playerConsume(Player p) {
-		// TODO Auto-generated method stub
-		
+		p.getHigh();
 	}
 
 }
