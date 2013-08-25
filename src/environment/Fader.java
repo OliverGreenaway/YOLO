@@ -19,7 +19,7 @@ public class Fader {
 		img = new BufferedImage(screenWidth, screenHeight, BufferedImage.TYPE_INT_ARGB);
 		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, opacity));
 		g2.setColor(Color.BLACK);
-		g2.fillRect(0, 0, screenWidth, screenHeight);
+		g2.fillRect(screenWidth/2-250, 0, 500, screenHeight);
 	}
 	
 	public boolean fade(){

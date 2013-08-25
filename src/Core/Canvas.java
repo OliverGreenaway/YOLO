@@ -1,8 +1,9 @@
 package Core;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Rectangle;
+import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
@@ -12,10 +13,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Queue;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
@@ -34,13 +31,13 @@ public class Canvas extends JPanel implements KeyListener {
 	private int pressRight = KeyEvent.VK_RIGHT;
 	private int pressUP = KeyEvent.VK_UP;
 	private int pressDown = KeyEvent.VK_DOWN;
-	
+
 	private String running = "";
 
 	private Tiles tiles;
 
 	private MainGame main;
-	
+
 	private Fader fader = new Fader();
 
 	public Canvas(GUI parent, Tiles tiles) {
@@ -85,6 +82,7 @@ public class Canvas extends JPanel implements KeyListener {
 	public void setMain(MainGame main) {
 		this.main = main;
 	}
+
 	// basic logic for movement:
 	// they try to move in a direction, compute what their bounding box
 	// would be and whether that box would be colliding with a wall.
@@ -98,11 +96,12 @@ public class Canvas extends JPanel implements KeyListener {
 		} else if (e.getKeyCode() == pressRight) {
 			running = "right";
 		}
-		gui.repaint();	
+		gui.repaint();
 	}
-	
-	private void canvasKeyReleased(KeyEvent e){
-		if (e.getKeyCode() == pressLeft || e.getKeyCode() == pressRight) running = "";
+
+	private void canvasKeyReleased(KeyEvent e) {
+		if (e.getKeyCode() == pressLeft || e.getKeyCode() == pressRight)
+			running = "";
 	}
 
 	private void canvasMouseMoved(MouseEvent e) {
@@ -119,14 +118,32 @@ public class Canvas extends JPanel implements KeyListener {
 		g.fillRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 
 		tiles.draw(g, main.getDepth());
-		player.draw(g,main.getOffsetX(),main.getOffsetY());
+		player.draw(g, main.getOffsetX(), main.getOffsetY());
+
+		
+		
+
+		// Score
+		int fontSize = 50;
+		//Graphics2D g2d = (Graphics2D) g;
+		System.out.println(Player.score);
+		g.setColor(Color.white);
+		Font font = new Font("Agency FB", Font.BOLD, fontSize);
+		g.setFont(font);
+		g.drawString(String.format("Score: %d", Player.score),
+				SCREEN_WIDTH * 3 / 4, fontSize);
+		// Sobriety bar
+		g.setColor(Color.green);
+		g.fillRect(SCREEN_WIDTH * 3 / 4, fontSize + 20,
+				Math.abs(Player.sobriety * 3), 20);
+		g.setColor(Color.white);
+		g.drawRect(SCREEN_WIDTH * 3 / 4, fontSize + 20,
+				Player.MAX_SOBRIETY * 3, 20);
 		
 		// overlay fader
 		fader.draw(g, this.getWidth(), this.getHeight());
 	}
-	
 
-	
 	@Override
 	public void keyPressed(KeyEvent e) {
 		canvasKeyPressed(e);
@@ -156,6 +173,7 @@ public class Canvas extends JPanel implements KeyListener {
 	 */
 	public void setPressLeft(int pressLeft) {
 		this.pressLeft = pressLeft;
+		
 	}
 
 	/**
@@ -206,8 +224,8 @@ public class Canvas extends JPanel implements KeyListener {
 	public void setPressDown(int pressDown) {
 		this.pressDown = pressDown;
 	}
-	
-	public String getDirection(){
+
+	public String getDirection() {
 		return this.running;
 	}
 
