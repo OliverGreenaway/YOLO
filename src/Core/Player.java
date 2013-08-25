@@ -83,9 +83,15 @@ public class Player {
 			//Black out - need to do this
 			//reset sobriety
 			sobriety = MAX_SOBRIETY;
-			
+
+			String path = canvas.getMain().getPath();
+			path += "blackout.wav";
+			canvas.getMain().playSound(path);
+
 		}
 		canvas.setOpacity(1.0f-((float)sobriety/(float)MAX_SOBRIETY));
+		
+		
 	}
 	
 	public void getHigh(){

@@ -237,5 +237,9 @@ public class Canvas extends JPanel implements KeyListener {
 		long highTimer = fader.getHigh();
 		main.setHigh(highTimer);
 	}
+	
+	public MainGame getMain(){
+		return this.main;
+	}
 
 }

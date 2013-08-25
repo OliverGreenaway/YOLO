@@ -37,6 +37,10 @@ public class MainGame {
 	private long highTimerStart = 0;
 	private final String path = "src" + File.separatorChar + "data" + File.separatorChar;
 
+	public String getPath(){
+		return this.path;
+	}
+	
 	public MainGame(Player player, GUI gui, Canvas canvas, Tiles tiles) {
 		canvas.setMain(this);
 		this.player = player;
