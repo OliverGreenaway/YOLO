@@ -136,6 +136,11 @@ public class RoadTile {
 
 		int TILE_HT = Tiles.TILE_HT;
 		int offset = 160;
+		
+		//int lowerBound = parent.canvas.SCREEN_WIDTH/2 - TILE_HT/2 + offset;
+		//int upperBound = 
+		
+		//int upperBound = TILE_HT - 2*offset - IMG_WD/2;
 		int lowerBound = offset;
 		int upperBound = TILE_HT - 2 * offset;
 		
@@ -145,8 +150,12 @@ public class RoadTile {
 
 		while (true) {
 			valid = true;
+			
+			
 			int xPos = rand.nextInt(upperBound) + lowerBound;
 			int yPos = rand.nextInt(TILE_HT - IMG_WD);
+			
+			
 			Rectangle rect = new Rectangle(xPos, yPos, IMG_WD, IMG_WD);
 
 			//get width of all items, check for intersection
