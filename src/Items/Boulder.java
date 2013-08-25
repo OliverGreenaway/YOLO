@@ -27,10 +27,13 @@ public class Boulder extends Item implements PickUpItem {
 		if (r == 0){
 			//New Game
 			GUI.canvas.removeAll();
+			GUI.canvas.getGUI().dispose();
 			Player.sobriety = Player.MAX_SOBRIETY;
 			Player.score = 0;
 			GUI gui = new GUI();
-		} 
+		} else{
+			System.exit(1);
+		}
 		MainGame.running = false;
 		try {
 			Thread.sleep(5000);
