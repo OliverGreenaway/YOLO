@@ -36,6 +36,7 @@ public class Vodka extends Item implements PickUpItem {
 				//minus 10 off sobriety
 				else{
 					Player.sobriety -= amount;
+					Player.blackOut();
 				}
 				
 				// TODO BLUR

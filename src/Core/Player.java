@@ -32,7 +32,7 @@ public class Player {
 	
 	private BufferedImage model;
 	private ImageObserver modelObserver;
-	private Canvas canvas;
+	private static Canvas canvas;
 
 	/**
 	 * @return the canvas
@@ -77,10 +77,14 @@ public class Player {
 	 * and their sobriety level resets.
 	 */
 	public static  void blackOut(){
+
+		canvas.setOpacity((float)sobriety/(float)MAX_SOBRIETY);
+		System.out.println((float)sobriety/(float)MAX_SOBRIETY);
 		if (sobriety <= MIN_SOBRIETY){
 			//Black out - need to do this
 			//reset sobriety
 			sobriety = MAX_SOBRIETY;
+			
 		}
 	}
 	
