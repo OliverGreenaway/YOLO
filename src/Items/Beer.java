@@ -18,12 +18,12 @@ public class Beer extends Item implements PickUpItem {
 	public void playerConsume(Player p) {
 	
 		//randomize LEFT, RIGHT keys
-		int prevRight = super.getCanvas().getPressRight();
-		int prevLeft = super.getCanvas().getPressLeft();
+		int prevRight = p.getCanvas().getPressRight();
+		int prevLeft = p.getCanvas().getPressLeft();
 		double rand = Math.random();
 		if(rand > 0.4){
-			super.getCanvas().setPressRight(prevLeft);
-			super.getCanvas().setPressLeft(prevRight);
+			p.getCanvas().setPressRight(prevLeft);
+			p.getCanvas().setPressLeft(prevRight);
 		}
 		
 		int amount = 10;
