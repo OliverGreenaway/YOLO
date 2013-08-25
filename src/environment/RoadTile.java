@@ -121,6 +121,16 @@ public class RoadTile {
 					}
 						this.items.put(new Burger(img), p);
 						break;
+						
+					case "Whiskey":
+						extension = parent.commonItems.get("Whiskey");
+						try {
+							img = ImageIO.read(new FileInputStream(filepath + extension));
+						} catch (IOException e) {
+					}
+						this.items.put(new Whiskey(img), p);
+						break;
+						
 					}
 					
 				}
