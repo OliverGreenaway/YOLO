@@ -67,14 +67,14 @@ public class MainGame {
 	public void run() {
 
 		long time = System.currentTimeMillis();
-
+		long time2 = 0;
+		
 		while (running) {
 
-			long time2 = System.currentTimeMillis();
+			time2 = System.currentTimeMillis();
 			if (time2 - time > 50) {
 				if (canvas.getDirection().equals("right")) {
 					offset_x -= player.STEP_SIZE;
-
 					offset_x = Math.max(offset_x, -160 + player.getWidth() / 2);
 				} else if (canvas.getDirection().equals("left")) {
 					offset_x += player.STEP_SIZE;
@@ -170,7 +170,6 @@ public class MainGame {
 		    	sound.start();
 		    }
 		    catch(Exception e){
-		    	System.out.println(e.getStackTrace());
 		    }
 	}
 	
