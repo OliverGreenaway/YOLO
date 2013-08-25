@@ -99,8 +99,8 @@ public class RoadTile {
 									+ extension));
 
 						} catch (IOException e) {
-						}
-						this.items.put(new Pizza(img), p);
+					}
+						this.items.put(new Burger(img), p);
 						break;
 					}
 				}
