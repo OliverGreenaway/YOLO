@@ -57,7 +57,7 @@ public class Vodka extends Item implements PickUpItem {
 			p.getCanvas().setPressRight(setUP);
 		}
 
-		int amount = 20;
+		int amount = 15;
 		// increment score
 		Player.score += amount;
 		// check if the minimum sobriety is not reached if so set to 0
