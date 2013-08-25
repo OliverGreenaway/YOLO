@@ -1,7 +1,6 @@
 package Items;
 
 import java.awt.Graphics;
->>>>>>> a909854e26631520e507e2dd2d8f33160d690f5c
 import java.awt.image.BufferedImage;
 
 import Core.Player;
