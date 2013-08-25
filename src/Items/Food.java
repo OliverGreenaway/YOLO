@@ -14,19 +14,6 @@ public class Food extends Item implements PickUpItem{
 	}
 	
 	@Override
-	public void playerConsume(Player p) {
-		int foodCost = 10;
-		int sobrietyCount = 10;
-		//Decrement Score
-		Player.score -= foodCost;
-		//Increase Sobriety
-		if(Player.sobriety + sobrietyCount >= Player.MAX_SOBRIETY){
-			Player.sobriety = Player.MAX_SOBRIETY;
-		}
-		
-		else{
-			Player.sobriety += 10;
-		}
-	}
+	public void  playerConsume(Player p) {}
 
 }

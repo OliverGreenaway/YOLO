@@ -20,6 +20,7 @@ import java.util.Queue;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+import environment.Fader;
 import environment.Tiles;
 
 public class Canvas extends JPanel implements KeyListener {
@@ -39,6 +40,8 @@ public class Canvas extends JPanel implements KeyListener {
 	private Tiles tiles;
 
 	private MainGame main;
+	
+	private Fader fader = new Fader();
 
 	public Canvas(GUI parent, Tiles tiles) {
 
@@ -118,8 +121,10 @@ public class Canvas extends JPanel implements KeyListener {
 		tiles.draw(g, main.getDepth());
 		player.draw(g,main.getOffsetX(),main.getOffsetY());
 		
-		// Draw Score here
+		// overlay fader
+		fader.draw(g, this.getWidth(), this.getHeight());
 	}
+	
 
 	
 	@Override

@@ -1,24 +1,20 @@
 package Items;
 
-import java.awt.Graphics;
->>>>>>> a909854e26631520e507e2dd2d8f33160d690f5c
 import java.awt.image.BufferedImage;
 
+import Core.Canvas;
 import Core.Player;
 
-public class Burger extends Item implements PickUpItem{
+public class Pizza extends Food {
 
-	public Burger(BufferedImage image) {
+	public Pizza(BufferedImage image) {
 		super(image);
-		// TODO Auto-generated constructor stub
 	}
-
+	
 	@Override
 	public void playerConsume(Player p) {
-		// TODO Auto-generated method stub
-		
-		int foodCost = 10;
-		int sobrietyCount = 10;
+		int foodCost = 15;
+		int sobrietyCount = foodCost;
 		//Decrement Score
 		Player.score -= foodCost;
 		//Increase Sobriety
@@ -27,9 +23,8 @@ public class Burger extends Item implements PickUpItem{
 		}
 		
 		else{
-			Player.sobriety += 10;
+			Player.sobriety += foodCost;
 		}
-		
 	}
 
 }
