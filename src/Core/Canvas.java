@@ -227,5 +227,9 @@ public class Canvas extends JPanel implements KeyListener {
 	public String getDirection() {
 		return this.running;
 	}
+	
+	public void setOpacity(float f){
+		fader.setOpacity(f);
+	}
 
 }

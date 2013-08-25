@@ -23,10 +23,12 @@ public class Burger extends Item implements PickUpItem{
 		//Increase Sobriety
 		if(Player.sobriety + sobrietyCount >= Player.MAX_SOBRIETY){
 			Player.sobriety = Player.MAX_SOBRIETY;
+			Player.blackOut();
 		}
 		
 		else{
 			Player.sobriety += 10;
+			Player.blackOut();
 		}
 		
 	}
