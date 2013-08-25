@@ -21,7 +21,7 @@ public class Player {
 	public final int POS_Y;
 	private int IMG_WIDTH;
 	private int IMG_HEIGHT;
-	public static final int STEP_SIZE = 7;
+	public static final int STEP_SIZE = 10;
 
 	public final static int MAX_SOBRIETY = 100;
 	public final static int MIN_SOBRIETY = 0;

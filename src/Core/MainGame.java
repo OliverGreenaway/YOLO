@@ -28,6 +28,8 @@ public class MainGame {
 	private int offset_x;
 	public int depth = 0;
 	public static boolean running = true;
+	public int DEPTH_STEP = 6;
+	private Queue<Item> toRemove = new ArrayDeque<Item>();
 
 	public MainGame(Player player, GUI gui, Canvas canvas, Tiles tiles) {
 		canvas.setMain(this);
@@ -70,9 +72,12 @@ public class MainGame {
 				}
 
 				changeAnimation();
-				checkCollisions();
+				Map<Item,Point> map = checkCollisions();
+				if (map != null){
+					map.remove(toRemove.poll());
+				}
 
-				depth += 7;
+				depth += DEPTH_STEP;
 				time = time2;
 			}
 
@@ -87,7 +92,8 @@ public class MainGame {
 		animations.add(head);
 	}
 
-	public Item checkCollisions() {
+	public Map<Item,Point> checkCollisions() {
+		
 		int startIndex = (int) (depth / Tiles.TILE_HT);
 		//RoadTile tile = tiles.getTile(startIndex);
 		int width = player.getWidth();
@@ -103,22 +109,21 @@ public class MainGame {
 			
 			for (Map.Entry<Item, Point> entry : map.entrySet()) {
 
-				//ht = TILE_HT
-				
 				// calculate item bounding box
 				int imageWidth = entry.getKey().getWidth();
 				Point p = entry.getValue();
 				int itemX = canvas.SCREEN_WIDTH / 2 - ht/2 + p.x;
 				int itemY = canvas.getHeight() - ht * i - ht + depth + p.y;
-				Rectangle itemBox = new Rectangle(itemX, itemY, imageWidth,
-						imageWidth);
+				Rectangle itemBox = new Rectangle(itemX, itemY, imageWidth,imageWidth);
 
 				//calculate intersection
 				if (playerBox.intersects(itemBox)) {
 					
 					if (entry.getKey() instanceof PickUpItem){
+						toRemove.add(entry.getKey());
 						PickUpItem item = (PickUpItem) (entry.getKey());
 						item.playerConsume(player);
+						return map;
 					}
 					
 				}
