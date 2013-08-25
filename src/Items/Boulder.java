@@ -28,7 +28,9 @@ public class Boulder extends Item implements PickUpItem {
 			Player.sobriety = Player.MAX_SOBRIETY;
 			Player.score = 0;
 			GUI gui = new GUI();
-		} 
+		} else{
+			System.exit(1);
+		}
 		MainGame.running = false;
 		try {
 			Thread.sleep(5000);
