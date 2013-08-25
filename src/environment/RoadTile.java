@@ -33,52 +33,57 @@ public class RoadTile {
 	}
 
 	public void generateItems() {
-		//generate up to 4 boulders
-		if (position < 1) return;
-		
-		for (int i = 0; i < 4; i++){
+		// generate up to 4 boulders
+		if (position < 1)
+			return;
+
+		for (int i = 0; i < 4; i++) {
 			double rand = Math.random();
-			if (rand < 0.7){
-				Point p = generateValidPoint(Tiles.IMG_WD*2);
-				if (p.x < 0) break;
+			if (rand < 0.7) {
+				Point p = generateValidPoint(Tiles.IMG_WD * 2);
+				if (p.x < 0)
+					break;
 				String extension = parent.commonItems.get("Boulder");
-				String filepath = "src" + File.separatorChar + "data" + File.separatorChar;
+				String filepath = "src" + File.separatorChar + "data"
+						+ File.separatorChar;
 				BufferedImage image = null;
-				try{
-					image = ImageIO.read(new FileInputStream(filepath + extension));
+				try {
+					image = ImageIO.read(new FileInputStream(filepath
+							+ extension));
+				} catch (IOException e) {
 				}
-				catch(IOException e){}
 				this.items.put(new Boulder(image), p);
 			}
 		}
-		
-		
+
 		// generate up to 5 items
 		for (int i = 0; i < 5; i++) {
 
 			List<String> items = parent.items;
-			
+
 			double rand = Math.random();
 			if (rand < 0.75) {
+
 				// generate a valid position for the item
 				int randIndex = (int) (Math.random() * (Tiles.items.size()));
 				Point p = generateValidPoint(Tiles.IMG_WD);
-				if (p.x < 0) break;
-				String filepath = "src" + File.separatorChar + "data" + File.separatorChar;
+				if (p.x < 0)
+					break;
+				String filepath = "src" + File.separatorChar + "data"
+						+ File.separatorChar;
 
 				// randomly choose an item to spawn
 				String extension;
 				BufferedImage img = null;
 
 				// rare item list
-				if (rand < 0.12) {
+				if (rand < 0.1) {
 
 					switch (items.get(randIndex)) {
 					case "Shrooms":
 						extension = parent.rareItems.get("Shrooms");
 						try {
-							
-							
+
 							img = ImageIO.read(new FileInputStream(filepath
 									+ extension));
 						} catch (IOException e) {
@@ -95,7 +100,8 @@ public class RoadTile {
 					case "Beer":
 						extension = parent.commonItems.get("Beer");
 						try {
-							img = ImageIO.read(new FileInputStream(filepath+ extension));
+							img = ImageIO.read(new FileInputStream(filepath
+									+ extension));
 						} catch (IOException e) {
 						}
 						this.items.put(new Beer(img), p);
@@ -112,86 +118,84 @@ public class RoadTile {
 
 						this.items.put(new Whiskey(img), p);
 						break;
-						
+
 					case "Burger":
 						extension = parent.commonItems.get("Burger");
 						try {
-							img = ImageIO.read(new FileInputStream(filepath + extension));
+							img = ImageIO.read(new FileInputStream(filepath
+									+ extension));
 						} catch (IOException e) {
-					}
+						}
 						this.items.put(new Burger(img), p);
 						break;
-						
+
 					case "Whiskey":
 						extension = parent.commonItems.get("Whiskey");
 						try {
-							img = ImageIO.read(new FileInputStream(filepath + extension));
+							img = ImageIO.read(new FileInputStream(filepath
+									+ extension));
 						} catch (IOException e) {
-					}
+						}
 						this.items.put(new Whiskey(img), p);
 						break;
-						
+
 					}
-					
+
 				}
 			}
 		}
-
 	}
 
 	/**
 	 * Generate a random point, iterate through the map Check if it collides
-	 * with anything
-	 * @ IMG_WD: the width of the item to generate
+	 * with anything @ IMG_WD: the width of the item to generate
 	 */
 	public Point generateValidPoint(int IMG_WD) {
 
 		int TILE_HT = Tiles.TILE_HT;
 		int offset = 160;
-		
-		//int lowerBound = parent.canvas.SCREEN_WIDTH/2 - TILE_HT/2 + offset;
-		//int upperBound = 
-		
-		//int upperBound = TILE_HT - 2*offset - IMG_WD/2;
+
+		// int lowerBound = parent.canvas.SCREEN_WIDTH/2 - TILE_HT/2 + offset;
+		// int upperBound =
+
+		// int upperBound = TILE_HT - 2*offset - IMG_WD/2;
 		int lowerBound = offset;
 		int upperBound = TILE_HT - 2 * offset;
-		
+
 		Random rand = new Random();
 		boolean valid = true;
 		int count = 0;
 
 		while (true) {
 			valid = true;
-			
-			
+
 			int xPos = rand.nextInt(upperBound) + lowerBound;
 			int yPos = rand.nextInt(TILE_HT - IMG_WD);
-			
-			
+
 			Rectangle rect = new Rectangle(xPos, yPos, IMG_WD, IMG_WD);
 
-			//get width of all items, check for intersection
-			for (Map.Entry<Item,Point> me : items.entrySet()){
+			// get width of all items, check for intersection
+			for (Map.Entry<Item, Point> me : items.entrySet()) {
 				Point p = me.getValue();
 				Item itm = me.getKey();
 				int width = itm.getImage().getHeight();
-				Rectangle itemRect = new Rectangle(p.x,p.y,width,width);
-				
-				if (rect.intersects(itemRect)){
+				Rectangle itemRect = new Rectangle(p.x, p.y, width, width);
+
+				if (rect.intersects(itemRect)) {
 					valid = false;
 					count++;
 					break;
 				}
-				
+
 			}
 
 			if (valid)
-				return new Point(xPos,yPos);
+				return new Point(xPos, yPos);
 			if (count > 4)
-				return new Point(-1,-1);
-			
+				return new Point(-1, -1);
+
 		}
-			
+
 	}
 
 	public Map<Item, Point> getMap() {

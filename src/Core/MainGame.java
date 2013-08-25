@@ -52,7 +52,6 @@ public class MainGame {
 		offset_x = 0;
 		this.tiles = tiles;
 		setupAnimations();
-		System.out.println(this.path + "yolo.wav");
 		run();
 	}
 
