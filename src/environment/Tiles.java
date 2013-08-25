@@ -29,7 +29,7 @@ public class Tiles {
 	public static Map<String,String> commonItems;
 	public static Map<String,String> rareItems;
 	public final static int IMG_WD = 32;
-	private Canvas canvas;
+	public Canvas canvas;
 	
 	public Tiles(String filepath, GUI parent) {
 		tiles = new ArrayList<RoadTile>();
