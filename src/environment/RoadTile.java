@@ -17,35 +17,35 @@ public class RoadTile{
 		this.position = position;
 		items = new HashMap<Item,Point>();
 		this.parent = parent;
-		generateItems();
+		//generateItems();
 	}
 	
-	public void generateItems(){
-	
-		for (int i = 0; i < 5; i++){
-			
-			double rand = Math.random();
-			if (rand < 0.2){
-				
-				List<String> items = parent.items;
-				int randIndex = (int)(Math.random()*(items.size()));
-				
-				generateValidPoint();
-				
-				if (items.get(randIndex).equals("Beer")){	
-				}
-				else if (items.get(randIndex).equals("Whiskey")){	
-				}
-				else if (items.get(randIndex).equals("Vodka")){
-				}
-				else if (items.get(randIndex).equals("Food")){
-				}
-				
-			}
-			
-		}
-		
-	}
+//	public void generateItems(){
+//	
+//		for (int i = 0; i < 5; i++){
+//			
+//			double rand = Math.random();
+//			if (rand < 0.2){
+//				
+//				List<String> items = parent.items;
+//				int randIndex = (int)(Math.random()*(items.size()));
+//				
+//				generateValidPoint();
+//				
+//				if (items.get(randIndex).equals("Beer")){	
+//				}
+//				else if (items.get(randIndex).equals("Whiskey")){	
+//				}
+//				else if (items.get(randIndex).equals("Vodka")){
+//				}
+//				else if (items.get(randIndex).equals("Food")){
+//				}
+//				
+//			}
+//			
+//		}
+//		
+//	}
 	
 	/** Generate a random point, iterate through the map
 	 * Check if it collides with anything
