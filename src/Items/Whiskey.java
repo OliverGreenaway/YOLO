@@ -23,12 +23,15 @@ public class Whiskey extends Item implements PickUpItem {
 
 	@Override
 	public void playerConsume(Player p) {
-		int setUP = p.getCanvas().getPressUP();
-		int setDown = p.getCanvas().getPressDown();
+		int setUP = p.getCanvas().getPressLeft();
+		int setDown = p.getCanvas().getPressUP();
 		double rand = Math.random();
 		if (rand > 0.4) {
 			p.getCanvas().setPressLeft(setUP);
 			p.getCanvas().setPressRight(setDown);
+		}else{
+			p.getCanvas().setPressLeft(setDown);
+			p.getCanvas().setPressRight(setUP);
 		}
 		
 		int amount = 20;
