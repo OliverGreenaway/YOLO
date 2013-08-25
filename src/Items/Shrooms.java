@@ -14,6 +14,7 @@ public class Shrooms extends Item implements PickUpItem {
 	@Override
 	public void playerConsume(Player p) {
 		p.getHigh();
+		p.score += 75;
 	}
 
 }

@@ -169,7 +169,7 @@ public class MainGame {
 		    	System.out.println(e.getStackTrace());
 		    }
 	}
-
+	
 	public int getOffsetX() {
 		return this.offset_x;
 	}

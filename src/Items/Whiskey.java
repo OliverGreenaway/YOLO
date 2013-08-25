@@ -31,7 +31,7 @@ public class Whiskey extends Item implements PickUpItem {
 			p.getCanvas().setPressRight(setDown);
 		}
 		
-		int amount = 15;
+		int amount = 20;
 		//increment score
 		Player.score += amount;
 		//check if the minimum sobriety is not reached if so set to 0
