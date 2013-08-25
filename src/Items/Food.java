@@ -29,12 +29,4 @@ public class Food extends Item implements PickUpItem{
 		}
 	}
 
-	@Override
-	public void draw(Graphics g) {
-		g.drawImage(this.getImage(), this.getPosX(), this.getPosY(), 
-				this.getWIDTH(), this.getHEIGHT(), null);
-		
-		//Draw level of sobriety???
-	}
-
 }

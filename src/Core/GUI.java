@@ -17,9 +17,9 @@ public class GUI extends JFrame {
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Tiles tiles = new Tiles("NSRoad.png",this);
-		
 		this.canvas = new Canvas(this,tiles);
 		this.add(canvas);
+		tiles.setCanvas(canvas);
 		this.canvas.setVisible(true);
 		addKeyListener(canvas);
 		

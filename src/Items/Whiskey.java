@@ -46,12 +46,4 @@ public class Whiskey extends Item implements PickUpItem {
 
 	}
 
-	@Override
-	public void draw(Graphics g) {
-		// TODO Auto-generated method stub
-		g.drawImage(this.getImage(), this.getPosX(), this.getPosY(), 
-				this.getWIDTH(), this.getHEIGHT(), null);
-
-	}
-
 }

@@ -1,16 +1,20 @@
 package environment;
 
 import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.imageio.ImageIO;
 
 import Core.Canvas;
 import Core.GUI;
+import Items.Item;
 
 public class Tiles {
 
@@ -20,7 +24,10 @@ public class Tiles {
 	public static BufferedImage image;
 	public static BufferedImage imageFirst;
 	public static List<String> items;
-	public final static int IMG_WD = 16;
+	public static Map<String,String> commonItems;
+	public static Map<String,String> rareItems;
+	public final static int IMG_WD = 32;
+	private Canvas canvas;
 	
 	public Tiles(String filepath, GUI parent) {
 		tiles = new ArrayList<RoadTile>();
@@ -32,26 +39,53 @@ public class Tiles {
 		} catch (Exception e) {}
 	
 		this.items = new ArrayList<String>();
-		items.add("Bottle");
+		items.add("Beer");
 		items.add("Whiskey");
-		items.add("Food");
+		items.add("Burger");
+		items.add("Vodka");
+		items.add("Shrooms");
 		
+		this.commonItems = new HashMap<String,String>();
+		commonItems.put("Beer","Beer.png");
+		commonItems.put("Whiskey", "Whiskey.png");
+		commonItems.put("Burger","Burger.png");
+		commonItems.put("Vodka", "Vodka.png");
+		
+		this.rareItems = new HashMap<String,String>();
+		rareItems.put("Shrooms","Shrooms.png");
 	}
 
 	public void addTile(){
 		tiles.add(new RoadTile(tiles.size(),this));
 	}
 	
-	public void draw(Graphics g, Canvas cv, int depth){
+	public void setCanvas(Canvas cv){
+		this.canvas = cv;
+	}
+	
+	public void draw(Graphics g, int depth){
 		
-		int x = cv.SCREEN_WIDTH/2 - image.getWidth()/2;
+		int x = canvas.SCREEN_WIDTH/2 - image.getWidth()/2;
 		int ht = image.getHeight();
-		int start = cv.getHeight();
+		int start = canvas.getHeight();
 		int startIndex = (int)(depth/ht);
 		
 		for (int i = 0; i < tiles.size(); i++){
 			if (i == 0) g.drawImage(this.imageFirst, x, start - ht*i - ht + depth, null);
 			else g.drawImage(this.image, x, start - ht*i - ht + depth,null);
+			
+			Map<Item,Point> items = tiles.get(i).getMap();
+			
+			for (Map.Entry<Item,Point> entry : items.entrySet()){
+				Point p = entry.getValue();
+				
+				int itemX = x + p.x;
+				int itemY = start - ht*i - ht + depth + p.y;
+				
+				entry.getKey().draw(g,itemX,itemY);
+			}
+			
+			
 		}
 		
 		//check if the top of the last one is below the top of the screen

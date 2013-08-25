@@ -115,7 +115,7 @@ public class Canvas extends JPanel implements KeyListener {
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 
-		tiles.draw(g, this,main.getDepth());
+		tiles.draw(g, main.getDepth());
 		player.draw(g,main.getOffsetX(),main.getOffsetY());
 		
 		// Draw Score here

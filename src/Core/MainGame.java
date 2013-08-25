@@ -93,18 +93,6 @@ public class MainGame {
 	
 	/** Check if the player is currently standing over an item */
 	public void checkItemCollision(){
-		Rectangle playerBox = player.getBoundingBox();
-		for (Item item : items){
-			Rectangle itemBox = item.getBoundingBox();
-			if (playerBox.intersects(itemBox)){
-				
-				if (item instanceof PickUpItem){
-					PickUpItem i = (PickUpItem) item;
-					i.playerConsume(player);
-				}
-
-			}
-		}
 	}
 	
 	public int getOffsetX(){
