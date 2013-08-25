@@ -10,6 +10,8 @@ import Core.GUI;
 import Core.MainGame;
 import Core.Player;
 
+
+
 public class Boulder extends Item implements PickUpItem {
 
 	public Boulder(BufferedImage image) {

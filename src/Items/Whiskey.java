@@ -8,6 +8,7 @@ import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
 import Core.Canvas;
+import Core.MainGame;
 import Core.Player;
 
 /**
@@ -31,7 +32,7 @@ public class Whiskey extends Item implements PickUpItem {
 			p.getCanvas().setPressRight(setDown);
 		}
 		
-		int amount = 20;
+		int amount = 20 * MainGame.modifier;
 		//increment score
 		Player.score += amount;
 		//check if the minimum sobriety is not reached if so set to 0

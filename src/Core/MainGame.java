@@ -35,6 +35,7 @@ public class MainGame {
 	private boolean high = false;
 	private long highTimer = 0;
 	private long highTimerStart = 0;
+	public static int modifier = 1;
 	private final String path = "src" + File.separatorChar + "data" + File.separatorChar;
 
 	public String getPath(){
@@ -97,6 +98,7 @@ public class MainGame {
 					this.tiles.setModel("Boulder", "Boulder.png");
 					this.high = false;
 					this.DEPTH_STEP -= 3;
+					this.modifier /= 2;
 				}
 			}
 
@@ -160,6 +162,7 @@ public class MainGame {
 		this.highTimer = System.currentTimeMillis();
 		this.DEPTH_STEP +=3;
 		this.highTimerStart = timer;
+		this.modifier *= 2;
 	}
 
 	/** Play the sound at the given filepath */

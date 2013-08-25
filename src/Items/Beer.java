@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 import Core.Canvas;
+import Core.MainGame;
 import Core.Player;
 
 public class Beer extends Item implements PickUpItem {
@@ -25,7 +26,7 @@ public class Beer extends Item implements PickUpItem {
 			p.getCanvas().setPressLeft(prevRight);
 		}
 		
-		int amount = 10;
+		int amount = 10 * MainGame.modifier;
 		//increment score
 		Player.score += amount;
 		//check if the minimum sobriety is not reached if so set to 0
