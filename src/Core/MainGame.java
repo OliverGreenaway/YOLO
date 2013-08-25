@@ -97,7 +97,7 @@ public class MainGame {
 					this.tiles.setModel("Boulder", "Boulder.png");
 					this.high = false;
 					this.DEPTH_STEP -= 3;
-					this.modifier /= 2;
+					this.modifier = 2;
 				}
 			}
 
