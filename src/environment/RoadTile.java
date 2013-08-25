@@ -95,9 +95,7 @@ public class RoadTile {
 					case "Beer":
 						extension = parent.commonItems.get("Beer");
 						try {
-							img = ImageIO.read(new FileInputStream(filepath
-									+ extension));
-
+							img = ImageIO.read(new FileInputStream(filepath+ extension));
 						} catch (IOException e) {
 						}
 						this.items.put(new Beer(img), p);

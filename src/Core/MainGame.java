@@ -14,7 +14,11 @@ import java.util.Map;
 import java.util.Queue;
 
 import javax.imageio.ImageIO;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 
+import sun.tools.jar.Main;
 import environment.RoadTile;
 import environment.Tiles;
 
@@ -45,6 +49,7 @@ public class MainGame {
 		this.tiles = tiles;
 		setupAnimations();
 
+		//playSound("yolo.wav");
 		run();
 	}
 
@@ -152,6 +157,25 @@ public class MainGame {
 		this.highTimerStart = timer;
 	}
 
+	public static synchronized void playSound(final String file) {
+		  new Thread(new Runnable() {
+		  // The wrapper thread is unnecessary, unless it blocks on the
+		  // Clip finishing; see comments.
+		    public void run() {
+		      try {
+		        Clip clip = AudioSystem.getClip();
+		        String path = "src" + File.separatorChar + "data" + File.separatorChar + file;
+		        System.out.println(path);
+		        AudioInputStream inputStream = AudioSystem.getAudioInputStream(Main.class.getResourceAsStream(path));
+		        clip.open(inputStream);
+		        clip.start(); 
+		      } catch (Exception e) {
+		        System.err.println(e.getMessage());
+		      }
+		    }
+		  }).start();
+		}
+	
 	public int getOffsetX() {
 		return this.offset_x;
 	}
