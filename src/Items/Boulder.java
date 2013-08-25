@@ -3,8 +3,10 @@ package Items;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
+import Core.GUI;
 import Core.MainGame;
 import Core.Player;
 
@@ -17,8 +19,16 @@ public class Boulder extends Item implements PickUpItem {
 	
 	@Override
 	public void playerConsume(Player p) {
-		JOptionPane.showMessageDialog(null,
-				"YOUR FUCKED BRO!!!!!!!!!!!!!");
+		int r = JOptionPane.showConfirmDialog(null, new JLabel("Game Over!\n Play Again?"),
+				"Warning!", JOptionPane.YES_NO_OPTION,
+				JOptionPane.WARNING_MESSAGE);
+		if (r == 0){
+			//New Game
+			GUI.canvas.removeAll();
+			Player.sobriety = Player.MAX_SOBRIETY;
+			Player.score = 0;
+			GUI gui = new GUI();
+		} 
 		MainGame.running = false;
 		try {
 			Thread.sleep(5000);

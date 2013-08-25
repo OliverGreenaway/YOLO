@@ -10,8 +10,8 @@ import environment.Tiles;
 
 
 public class GUI extends JFrame {
-	public Canvas canvas;
-	public MainGame main;
+	public static Canvas canvas;
+	public static MainGame main;
 	public GUI(){
 		this.setExtendedState(this.getExtendedState() | this.MAXIMIZED_BOTH);
 		this.setVisible(true);

@@ -77,10 +77,8 @@ public class Player {
 	 * and their sobriety level resets.
 	 */
 	public static  void blackOut(){
-
 		
 		if (sobriety <= MIN_SOBRIETY){
-			//Black out - need to do this
 			//reset sobriety
 			sobriety = MAX_SOBRIETY;
 			

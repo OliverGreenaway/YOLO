@@ -6,7 +6,7 @@ import Core.Player;
 
 
 public interface PickUpItem {
-	
+
 	public void playerConsume(Player p);
 
 }

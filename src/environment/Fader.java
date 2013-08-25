@@ -7,6 +7,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Random;
@@ -16,6 +17,7 @@ import javax.imageio.ImageIO;
 public class Fader {
 
 	private BufferedImage img;
+	private BufferedImage mist;
 	private float opacity = 0;
 	private boolean high = false;
 	private long startTime;
@@ -23,8 +25,8 @@ public class Fader {
 
 	public Fader() {
 		try {
-			img = ImageIO.read(new FileInputStream("src"+File.separatorChar+"data"
-					+ File.separatorChar + "ShroomBackground.png"));
+			img = ImageIO.read(new FileInputStream("src" + File.separatorChar
+					+ "data" + File.separatorChar + "ShroomBackground.png"));
 		} catch (IOException e) {
 		}
 	}
@@ -32,17 +34,29 @@ public class Fader {
 	public void draw(Graphics g, int screenWidth, int screenHeight) {
 		Graphics2D g2 = (Graphics2D) g;
 		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,
-				opacity));
+				Math.min(0.7f,opacity)));
 		if (!high) {
+			try {
+				if (mist == null) {
+					mist = ImageIO.read(new FileInputStream("src"
+							+ File.separatorChar + "data" + File.separatorChar
+							+ "test.jpg"));
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			g2.drawImage(mist, 0, 0, screenWidth, screenHeight, null);
 			g2.setColor(Color.BLACK);
-			g2.fillRect(screenWidth / 2 - 250, 0, 500, screenHeight);
+			g2.fillRect(0, 0, screenWidth, screenHeight);
+
 		} else {
 			if (img != null) {
-				float op = (float)Math.random()%0.5f;
-				g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,
-						op));
+				float op = (float) Math.random() % 0.5f;
+				g2.setComposite(AlphaComposite.getInstance(
+						AlphaComposite.SRC_OVER, op));
 				g2.drawImage(img, 0, 0, screenWidth, screenHeight, null);
-				if(System.currentTimeMillis() - startTime > highTime){
+				if (System.currentTimeMillis() - startTime > highTime) {
 					high = false;
 				}
 			}
@@ -57,11 +71,11 @@ public class Fader {
 	public void reset() {
 		opacity = 0;
 	}
-	
-	public void getHigh(){
+
+	public void getHigh() {
 		high = true;
 		startTime = System.currentTimeMillis();
-		highTime = (long)(new Random().nextInt(10)+10)*1000;
+		highTime = (long) (new Random().nextInt(10) + 10) * 1000;
 	}
 
 	public void setOpacity(float f) {

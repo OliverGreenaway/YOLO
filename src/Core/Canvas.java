@@ -131,13 +131,17 @@ public class Canvas extends JPanel implements KeyListener {
 		g.setFont(font);
 		g.drawString(String.format("Score: %d", Player.score),
 				SCREEN_WIDTH * 3 / 4, fontSize);
-		// Sobriety bar
+		//Sobriety bar
 		g.setColor(Color.green);
 		g.fillRect(SCREEN_WIDTH * 3 / 4, fontSize + 20,
-				Math.abs(Player.sobriety * 3), 20);
+				Math.abs(Player.sobriety * 3), 30);
 		g.setColor(Color.white);
 		g.drawRect(SCREEN_WIDTH * 3 / 4, fontSize + 20,
-				Player.MAX_SOBRIETY * 3, 20);
+				Player.MAX_SOBRIETY * 3, 30);
+		//Sobriety text
+		font = new Font("Agency FB", Font.ITALIC, 30);
+		g.setFont(font);
+		g.drawString("Sobriety",SCREEN_WIDTH * 3 / 4 + ((Player.MAX_SOBRIETY*3)/2) -25, fontSize + 45);
 		
 		// overlay fader
 		fader.draw(g, this.getWidth(), this.getHeight());
