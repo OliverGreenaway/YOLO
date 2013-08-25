@@ -111,12 +111,7 @@ public abstract class Item {
 	public Rectangle getBoundingBox() {
 		return boundingBox;
 	}
-	/**
-	 * @param boundingBox the boundingBox to set
-	 */
-	public void setBoundingBox(Rectangle boundingBox) {
-		this.boundingBox = boundingBox;
-	}
+	
 	
 	
 }
